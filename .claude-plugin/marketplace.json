@@ -1,0 +1,77 @@
+{
+  "name": "my-plugins",
+  "owner": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "metadata": {
+    "description": "Daily-use Claude Code plugins: own and curated community.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "browser-use",
+      "source": "./browser-use",
+      "description": "Drives the browser-use CLI for fast, persistent browser automation (navigation, forms, screenshots, data extraction).",
+      "version": "0.1.0",
+      "keywords": ["browser", "automation", "scraping", "e2e"]
+    },
+    {
+      "name": "library-skills",
+      "source": "./library-skills",
+      "description": "Pulls in up-to-date official skills shipped by a project's installed libraries (FastAPI, Streamlit, etc.) via tiangolo/library-skills.",
+      "version": "0.1.0",
+      "keywords": ["library", "skills", "deps", "version-sync"]
+    },
+    {
+      "name": "agent-debugger",
+      "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debugger.git" },
+      "description": "Pause execution and inspect runtime state via DAP. Attach to live processes by PID, no restart or code changes required.",
+      "version": "1.0.0",
+      "keywords": ["debugger", "dap", "runtime", "inspection"]
+    },
+    {
+      "name": "skill-doctor",
+      "source": { "source": "url", "url": "https://github.com/JoaquinCampo/skill-doctor.git" },
+      "description": "Evaluate Claude Code skills against best practices. Tracks skill usage globally via hooks.",
+      "version": "1.0.0",
+      "keywords": ["skills", "audit", "quality"]
+    },
+    {
+      "name": "agent-debate",
+      "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debate.git" },
+      "description": "Spawn a peer back-and-forth between Claude (max thinking) and Codex (high reasoning) on hard architecture decisions.",
+      "version": "1.0.0",
+      "keywords": ["debate", "architecture", "decision-making"]
+    },
+    {
+      "name": "superpowers",
+      "source": { "source": "url", "url": "https://github.com/obra/superpowers.git" },
+      "description": "Core skills library: TDD, debugging, brainstorming, plan-writing, code-review patterns.",
+      "version": "5.1.0",
+      "keywords": ["tdd", "debugging", "workflows", "best-practices"]
+    },
+    {
+      "name": "qdrant",
+      "source": { "source": "url", "url": "https://github.com/qdrant/skills.git" },
+      "description": "Agent skills for Qdrant vector search: scaling, performance, search quality, monitoring, deployment, SDK usage.",
+      "version": "1.0.0",
+      "keywords": ["qdrant", "vector-search", "rag"]
+    },
+    {
+      "name": "basecamp",
+      "source": { "source": "url", "url": "https://github.com/basecamp/basecamp-cli.git" },
+      "description": "Basecamp integration for Claude Code: create todos, track work, link code to projects.",
+      "version": "0.7.2",
+      "keywords": ["basecamp", "project-management", "37signals"]
+    },
+    {
+      "name": "langsmith-tracing",
+      "source": { "source": "url", "url": "https://github.com/langchain-ai/langsmith-claude-code-plugins.git" },
+      "description": "Trace Claude Code sessions to LangSmith: LLM calls, tool executions, subagent runs, context compaction.",
+      "version": "1.0.0",
+      "keywords": ["langsmith", "tracing", "observability", "llm"]
+    }
+  ]
+}

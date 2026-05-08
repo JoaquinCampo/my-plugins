@@ -1,0 +1,12 @@
+{
+  "name": "browser-use",
+  "version": "0.1.0",
+  "description": "Drives the browser-use CLI for fast, persistent browser automation (navigation, forms, screenshots, data extraction).",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["browser", "automation", "scraping", "e2e", "playwright-alternative"],
+  "skills": "./skills/"
+}

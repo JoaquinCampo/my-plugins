@@ -1,0 +1,12 @@
+{
+  "name": "library-skills",
+  "version": "0.1.0",
+  "description": "Pulls in up-to-date official skills shipped by a project's installed libraries (FastAPI, Streamlit, etc.) via tiangolo/library-skills.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["library-skills", "deps", "version-sync", "fastapi", "streamlit"],
+  "skills": "./skills/"
+}
