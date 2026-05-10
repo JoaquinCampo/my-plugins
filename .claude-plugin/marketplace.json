@@ -25,6 +25,13 @@
       "keywords": ["library", "skills", "deps", "version-sync"]
     },
     {
+      "name": "humanizer",
+      "source": "./humanizer",
+      "description": "Strips AI-tell patterns from text (em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, etc.) based on Wikipedia's 'Signs of AI writing' guide.",
+      "version": "2.5.1",
+      "keywords": ["writing", "editing", "ai-detection", "humanize", "prose"]
+    },
+    {
       "name": "agent-debugger",
       "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debugger.git" },
       "description": "Pause execution and inspect runtime state via DAP. Attach to live processes by PID, no restart or code changes required.",

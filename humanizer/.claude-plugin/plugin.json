@@ -1,0 +1,12 @@
+{
+  "name": "humanizer",
+  "version": "2.5.1",
+  "description": "Strips AI-tell patterns from text (em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, etc.) based on Wikipedia's 'Signs of AI writing' guide.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["writing", "editing", "ai-detection", "humanize", "prose"],
+  "skills": "./skills/"
+}
