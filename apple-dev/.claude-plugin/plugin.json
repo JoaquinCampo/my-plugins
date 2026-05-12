@@ -1,0 +1,12 @@
+{
+  "name": "apple-dev",
+  "version": "0.1.0",
+  "description": "Modern SwiftUI doctrine plus 7 recipes for Apple-platform development: no-ViewModel patterns, modular SwiftPM, Foundation Models on-device LLM, AppRouter navigation, iOS 26 Liquid Glass, encrypted push proxy, XcodeBuildMCP build verification, ObservableObject-to-Observable refactor.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["swiftui", "ios", "macos", "visionos", "apple", "foundation-models", "approuter", "ios26", "swiftpm", "apple-intelligence"],
+  "skills": "./skills/"
+}
