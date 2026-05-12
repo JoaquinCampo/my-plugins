@@ -1,6 +1,6 @@
 ---
 name: swiftui-doctrine
-description: Apply modern SwiftUI conventions when writing or reviewing Swift code for Apple platforms (iOS, iPadOS, macOS, visionOS). Triggers on SwiftUI views, @Observable services, NavigationStack, async/await in Swift, Apple-platform project work. Use to enforce no-ViewModel patterns, modular SwiftPM structure, and modern state management.
+description: Apply modern SwiftUI conventions on Apple platforms (iOS, iPadOS, macOS, visionOS). Triggers on SwiftUI views, `@Observable` services, `NavigationStack`, Swift `async/await`, and Apple-platform project work. Enforces no-ViewModel, modular SwiftPM.
 ---
 
 # SwiftUI Doctrine
@@ -25,6 +25,16 @@ Any task that creates, edits, or reviews SwiftUI views, `@Observable` services, 
 10. **Swift Testing + ViewInspector, not XCTest.** For new code use `@Test` and `#expect`. Use ViewInspector when a Preview is not enough. Test `@Observable` services directly. Every view ships at least one `#Preview`.
 11. **Composition over abstraction.** Break views by responsibility, not by inventing protocols. When a file passes roughly 300 lines or a `switch` case grows past a few lines, extract a focused subview, a `ViewModifier`, or a `ButtonStyle`.
 12. **Do not fight SwiftUI.** Use property wrappers as designed. Trust the diffing engine. Inject dependencies through `@Environment`; no service locator, no DI container, no `.shared` singletons.
+
+## Gotchas
+
+The highest-signal failure modes. If you see one of these symptoms, jump to the cause.
+
+- *Symptom*: view does not re-render when an `@Observable` service mutates. *Cause*: the service is stored as a property of another `@Observable`. *Fix*: hoist to the scene and inject siblings via `.environment(_:)`.
+- *Symptom*: in-flight async work continues after the view disappears, or stale results overwrite fresh state. *Cause*: `.onAppear { Task { ... } }` is fire-and-forget. *Fix*: use `.task` (or `.task(id:)` for input-driven reloads); both cancel on disappear.
+- *Symptom*: loading spinner stuck, or error and data shown at once. *Cause*: a `Bool isLoading + [T] items + Error? error` trio with no enforced exclusivity. *Fix*: model as `enum ViewState { case loading, loaded(T), error(Error) }` and `switch` in `body`.
+- *Symptom*: tests pass but the project fails to build. *Cause*: the editor type checker accepted code that the build refuses (availability gates, Sendable, package dep graph). *Fix*: run an actual build with XcodeBuildMCP or `xcodebuild` after every non-trivial edit; treat the build as the first quality gate.
+- *Symptom*: shared service updates appear in some views but not others. *Cause*: the service was re-initialized below the scene (e.g., in a `View`'s body), creating sibling instances. *Fix*: own the service with `@State` at the scene exactly once.
 
 ## Anti-patterns banned
 

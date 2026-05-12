@@ -36,7 +36,7 @@ Views declare local state with `@State`, model the screen as a `ViewState` enum,
 3. **Then convert views that read shared state.** Switch their consumption sites to `@Environment(Service.self)`. The compiler errors at the call sites are the worklist.
 4. **Delete empty ViewModels last.** Once nothing references a `*ViewModel`, remove the file. Do not delete in step 1; the compiler will guide you in step 4.
 
-## Pitfalls
+## Gotchas
 
 - Do not nest `@Observable` inside `@Observable`; SwiftUI's observation tracking breaks. Inject siblings at the scene instead.
 - `@State` on a class needs `@Observable` on the class. `@State` on a struct works as-is.

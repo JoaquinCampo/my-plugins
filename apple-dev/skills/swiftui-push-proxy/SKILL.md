@@ -1,6 +1,6 @@
 ---
 name: swiftui-push-proxy
-description: Build end-to-end encrypted push notifications for an iOS app where the upstream service (e.g., a federated social network, a self-hosted backend) cannot deliver directly to APNS. Architecture: relay proxy forwards opaque encrypted blobs to APNS, the device decrypts via RFC 8291 aesgcm using a P-256 keypair and 16-byte auth secret stored in the app's keychain. Use when integrating push for a service that uses Web Push standards rather than APNS-native. Triggers on push notifications, APNS, RFC 8291, NotificationServiceExtension, Web Push.
+description: Build E2E-encrypted iOS push for services that speak Web Push (not APNS-native): relay proxy + RFC 8291 aesgcm decryption on device, keys in shared keychain. Triggers on Web Push, APNS, RFC 8291, `UNNotificationServiceExtension`, federated push.
 ---
 
 # SwiftUI Push Proxy
@@ -48,7 +48,7 @@ All entries use `kSecAttrAccessibleAfterFirstUnlock` so the extension can read t
 - `client-side-keychain-decryption.md` covers CryptoKit key generation, keychain storage with `kSecAttrAccessGroup`, the NotificationService extension entry point, the full RFC 8291 aesgcm decryption (HKDF info strings, salt, nonce, AES-GCM-128), and INSendMessageIntent enrichment.
 - `proxy-server-architecture.md` covers the relay HTTPS endpoint, the device-to-APNS-token mapping, statelessness about message contents, rate limiting and retry, and hosting alternatives.
 
-## Pitfalls
+## Gotchas
 
 - Do not store keys in `UserDefaults` or a plist; only the keychain with `kSecAttrAccessibleAfterFirstUnlock`.
 - `UNNotificationServiceExtension` has a 30-second budget. Do crypto carefully and fast; avoid synchronous network calls before `contentHandler` is invoked at least once.

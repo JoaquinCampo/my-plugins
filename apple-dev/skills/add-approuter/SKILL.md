@@ -1,6 +1,6 @@
 ---
 name: add-approuter
-description: Adopt the AppRouter SwiftUI library (github.com/dimillian/AppRouter) for type-safe navigation with sheets and deep linking. Use when starting a new SwiftUI app's navigation layer, or replacing ad-hoc NavigationStack path management. Supports single-stack apps (SimpleRouter) and tab-based apps (Router) with independent navigation per tab.
+description: Adopt AppRouter (github.com/dimillian/AppRouter) for type-safe SwiftUI navigation with sheets and deep linking. Use when starting an app's nav layer or replacing ad-hoc `NavigationStack` path management. SimpleRouter or tab Router.
 ---
 
 # Add AppRouter
@@ -44,11 +44,17 @@ Both routers are `@Observable @MainActor final class`. Sheets, one slot, shared 
 - `references/simple-and-tab-router.md`: full worked examples of `SimpleRouter` and `Router`.
 - `references/deep-linking.md`: URL format, `onOpenURL`, contextual routing, parameter limits.
 
-## Limitations
+## Gotchas
 
-- One sheet slot per router. No sheet stack, no `.fullScreenCover`, no popover. Multi-step sheets need a `NavigationStack` inside the sheet.
-- URL deep links only work cleanly for argumentless enum cases. For `case detail(id: String)`, pass the `id` via a query parameter and read it in `from(...)`.
-- Sheets are not URL-addressable. The parser builds `[Destination]` only.
-- `Router.navigate(to: url)` always writes into `selectedTab`. Set `router.selectedTab` first if a link should land in another tab.
+- *Symptom*: `myapp://users/detail?id=u1` lands on the wrong destination or returns `false`. *Cause*: `URL.deepLink` uses `String(describing:)` per case; only argumentless cases serialize cleanly, and context prefixes silently skip when `from(...)` returns `nil`. *Fix*: build URLs with `URLComponents`, use `fullPath` to disambiguate inside `from(...)`. See `references/deep-linking.md`.
+- *Symptom*: presenting a second sheet replaces the first instead of stacking. *Cause*: one sheet slot per router; `presentSheet` overwrites. *Fix*: dismiss first, or push a `NavigationStack` inside the sheet for multi-step flows.
+- *Symptom*: `router.navigate(to: url)` lands in the wrong tab. *Cause*: `navigate(to: URL)` always writes into `selectedTab`. *Fix*: set `router.selectedTab` first; parse the tab from the URL host yourself.
+- *Symptom*: contextual routing misfires for URLs with repeated tokens like `myapp://detail/detail`. *Cause*: parser uses `fullPath.firstIndex(of: path)` so both calls see the same previous token. *Fix*: known gap, use distinct tokens (`item`, `subitem`) or pass position via a query parameter.
+- *Symptom*: `router.navigate(to: url)` returns `false` and nothing happens. *Cause*: every `from(...)` returned `nil`. *Fix*: log the parse result; ensure at least one path token resolves.
+
+## Hard limits
+
+- One sheet slot per router. No sheet stack, no `.fullScreenCover`, no popover.
+- Sheets are not URL-addressable. The parser builds `[Destination]` only; present sheets after navigating.
 - Query parameters are shared across every destination parsed from a single URL. There is no per-segment scoping.
 - No persistence, no animation hooks, no tab-switch callbacks. Wire those yourself.

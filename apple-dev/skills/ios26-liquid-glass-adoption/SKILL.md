@@ -1,6 +1,6 @@
 ---
 name: ios26-liquid-glass-adoption
-description: Adopt iOS 26 / iPadOS 26 / macOS 26 SwiftUI APIs in an existing UI (Liquid Glass effects, modernized toolbars and tab bars, new transitions and scrolling, content effects). Use when migrating a project to iOS 26 deployment target, or styling a new app to feel native on iOS 26+. Triggers on glassEffect, buttonStyle(.glass), ToolbarSpacer, tabBarMinimizeBehavior, matchedTransitionSource, scrollPosition, contentTransition.
+description: Adopt iOS 26 / iPadOS 26 / macOS 26 SwiftUI APIs: Liquid Glass, modernized toolbars and tab bars, matched transitions, scroll position. Triggers: `glassEffect`, `buttonStyle(.glass)`, `ToolbarSpacer`, `matchedTransitionSource`, `tabBarMinimizeBehavior`.
 ---
 
 # iOS 26 Liquid Glass Adoption
@@ -20,6 +20,14 @@ Deployment target must be iOS 26 / iPadOS 26 / macOS 26, with Xcode 26+. None of
 3. **Transitions**: `matchedTransitionSource(id:in:)` on a source view paired with `.navigationTransition(.zoom(sourceID:in:))` on the destination, plus `contentTransition(.numericText)` for animated counters.
 4. **Scrolling**: `scrollPosition(id:)` with an `Identifiable` binding, `scrollTargetBehavior(.viewAligned)` and `.paging`, and `scrollEdgeEffectStyle(_:for:)` for the new top and bottom edge effects.
 5. **Other**: the `@Entry` macro for environment values (replaces the `EnvironmentKey` boilerplate), `symbolEffect(.bounce, value:)` on SF Symbols, two-detent sheets with `presentationDetents([.height(...), .large])` and `presentationBackgroundInteraction(.enabled)`, and `textInputFormattingControlVisibility(.hidden, for: .all)` to suppress the new default formatting strip in `TextEditor`.
+
+## Gotchas
+
+- *Symptom*: `.glassEffect(in:)` renders as a plain background, no translucency. *Cause*: deployment target is still iOS 17 or 18. *Fix*: bump `Package.swift` `.iOS(.v26)` and the Xcode project minimum before touching the call sites; none of these APIs are back-deployable.
+- *Symptom*: matched zoom transition snaps instead of animating between the source and destination. *Cause*: source and destination use different `Namespace.ID` instances (each declared its own `@Namespace`). *Fix*: declare the namespace once at the parent and propagate it via the navigation value, sheet payload, or destination enum.
+- *Symptom*: two adjacent glass shapes flicker independently when one expands or contracts. *Cause*: each shape owns its own glass surface, so they cannot morph. *Fix*: wrap them in a `GlassEffectContainer` and animate the parent state.
+- *Symptom*: `contentTransition(.numericText)` animation jitters, digits reflow. *Cause*: no `.monospacedDigit()` on the label. *Fix*: add `.monospacedDigit()` adjacent to the `contentTransition` modifier; drive with `.animation(.smooth, value: count)`.
+- *Symptom*: tab bar does not collapse on scroll. *Cause*: `.tabBarMinimizeBehavior` is attached to a child view, not the `TabView`. *Fix*: attach the modifier directly to the `TabView`.
 
 ## Adoption order
 

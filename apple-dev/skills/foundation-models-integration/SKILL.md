@@ -1,6 +1,6 @@
 ---
 name: foundation-models-integration
-description: Add Apple's on-device Foundation Models framework (Apple Intelligence) to a SwiftUI app. Use for streaming LLM responses, @Generable structured output, Tool protocol implementations, availability checks. iOS 26+, iPadOS 26+, macOS 26+, visionOS 26+. Triggers on Apple Intelligence, Foundation Models, on-device LLM, @Generable, SystemLanguageModel, LanguageModelSession.
+description: Add Apple's on-device Foundation Models (Apple Intelligence) to a SwiftUI app: streaming, `@Generable` structured output, `Tool` protocol, availability checks. iOS / iPadOS / macOS / visionOS 26+. Triggers on `SystemLanguageModel`, `LanguageModelSession`, `@Generable`.
 ---
 
 # Foundation Models Integration
@@ -28,6 +28,14 @@ On-device LLM features in a SwiftUI app: streaming chat, structured output extra
 
 - `references/session-streaming-generable.md`: availability handling, session lifecycle, free-form streaming wired to SwiftUI state, `@Generable` types with `@Guide`, structured streaming with `PartiallyGenerated<T>`.
 - `references/tools-and-errors.md`: `Tool` protocol conformance, registering and triggering tools, the three error cases with try/catch examples and recommended UI copy, context-window recovery.
+
+## Gotchas
+
+- *Symptom*: streaming UI flashes between full text and partial text. *Cause*: concatenating chunk values from `streamResponse(to:)` instead of replacing. Each iteration yields the cumulative string. *Fix*: assign, do not append.
+- *Symptom*: model "forgets" earlier turns within a single conversation. *Cause*: a new `LanguageModelSession` was created per turn. *Fix*: store the session on a long-lived `@Observable` service for the conversation's lifetime.
+- *Symptom*: first response is multi-second slow, later responses are fast. *Cause*: no prewarm; weights load lazily on first request. *Fix*: call `session.prewarm()` as soon as user intent is clear (field focused, chat opened).
+- *Symptom*: `exceededContextWindowSize` thrown after a long session. *Cause*: full-transcript replay grew past the limit. *Fix*: rebuild the session with a condensed transcript or a rolling summary; see `references/tools-and-errors.md`.
+- *Symptom*: `PartiallyGenerated<T>` fields are `nil` even after the stream ends. *Cause*: structured-output fields are optional by design and only fill as the model emits them; the final value can still be missing fields if generation was cut. *Fix*: render each field as optional in the view; do not gate on the whole struct.
 
 ## Anti-patterns
 

@@ -1,6 +1,6 @@
 ---
 name: xcodebuildmcp-build-loop
-description: Set up and use XcodeBuildMCP to verify SwiftUI / iOS / macOS builds during agent-driven development. Use when working on an Xcode project where Claude should compile and run tests after edits, instead of stopping at type-checking. Provides the build/test commands and common-error remediation. Triggers on Xcode project, .xcodeproj, simulator build, xcodebuild, build verification, after editing iOS code.
+description: Set up and use XcodeBuildMCP to compile and test Xcode projects after Swift edits. Use after any edit to a `.xcodeproj` or `Package.swift`. Triggers on `xcodebuild`, simulator build, build verification, agent-driven iOS development.
 ---
 
 # XcodeBuildMCP Build Loop
@@ -50,6 +50,15 @@ If you do not know the scheme name, list schemes first with `mcp__XcodeBuildMCP_
 - After bumping the deployment target or changing build settings.
 - After adding a package dependency or moving files between targets.
 - Before opening a PR or committing.
+
+## Gotchas
+
+- *Symptom*: `mcp__XcodeBuildMCP__*` tools do not appear in the session. *Cause*: the MCP server did not start. *Fix*: check the registration in `~/.claude/settings.json` (or `.mcp.json`), run `npx -y xcodebuildmcp --help` in a shell to verify the binary resolves, then restart Claude Code.
+- *Symptom*: build fails with `No such module 'X'`. *Cause*: the target imports `X` but does not depend on the package that vends it. *Fix*: add the missing `.product(name: "X", package: "X")` to `target.dependencies` in `Package.swift`.
+- *Symptom*: build fails with "Unable to find a device matching the provided destination specifier". *Cause*: simulator name does not match an installed runtime. *Fix*: `xcrun simctl list devices available`, copy a name verbatim (case, spacing), update `session-set-defaults`.
+- *Symptom*: errors that vanish after a `clean_proj`. *Cause*: stale DerivedData (often after a branch switch or deployment-target bump). *Fix*: call `clean_proj` first; if persistent, delete `~/Library/Developer/Xcode/DerivedData/<ProjectHash>`.
+
+Eight more failure modes with fix recipes live in `references/common-errors.md`.
 
 ## Deep dives
 
