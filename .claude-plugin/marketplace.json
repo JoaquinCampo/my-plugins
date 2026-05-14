@@ -81,11 +81,11 @@
       "keywords": ["basecamp", "project-management", "37signals"]
     },
     {
-      "name": "langsmith-tracing",
-      "source": { "source": "url", "url": "https://github.com/langchain-ai/langsmith-claude-code-plugins.git" },
-      "description": "Trace Claude Code sessions to LangSmith: LLM calls, tool executions, subagent runs, context compaction.",
-      "version": "1.0.0",
-      "keywords": ["langsmith", "tracing", "observability", "llm"]
+      "name": "langchain-skills",
+      "source": { "source": "url", "url": "https://github.com/langchain-ai/langchain-skills.git" },
+      "description": "Agent skills for building agents with LangChain, LangGraph, and Deep Agents.",
+      "version": "0.1.0",
+      "keywords": ["langchain", "langgraph", "deep-agents", "agents"]
     },
     {
       "name": "tui-use",
