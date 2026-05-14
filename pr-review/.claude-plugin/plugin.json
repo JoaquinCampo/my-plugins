@@ -1,0 +1,12 @@
+{
+  "name": "pr-review",
+  "version": "0.1.0",
+  "description": "Pull-request review doctrine (triage, lenses, severity, stop rules) plus agent-specific tactics (context budget, tool escalation, review fan-out, responsible non-review).",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["pr-review", "code-review", "review", "agents", "doctrine"],
+  "skills": "./skills/"
+}

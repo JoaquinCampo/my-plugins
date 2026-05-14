@@ -32,6 +32,13 @@
       "keywords": ["writing", "editing", "ai-detection", "humanize", "prose"]
     },
     {
+      "name": "pr-review",
+      "source": "./pr-review",
+      "description": "Pull-request review doctrine (triage, lenses, severity, stop rules) plus agent-specific tactics (context budget, tool escalation, review fan-out, responsible non-review).",
+      "version": "0.1.0",
+      "keywords": ["pr-review", "code-review", "review", "agents", "doctrine"]
+    },
+    {
       "name": "apple-dev",
       "source": "./apple-dev",
       "description": "Modern SwiftUI doctrine plus 7 recipes for Apple-platform development: no-ViewModel patterns, modular SwiftPM, Foundation Models on-device LLM, AppRouter navigation, iOS 26 Liquid Glass, encrypted push proxy, XcodeBuildMCP build verification, ObservableObject-to-Observable refactor.",
