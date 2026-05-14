@@ -86,6 +86,13 @@
       "description": "Trace Claude Code sessions to LangSmith: LLM calls, tool executions, subagent runs, context compaction.",
       "version": "1.0.0",
       "keywords": ["langsmith", "tracing", "observability", "llm"]
+    },
+    {
+      "name": "tui-use",
+      "source": { "source": "url", "url": "https://github.com/onesuper/tui-use.git" },
+      "description": "TUI automation for AI agents: drive REPLs, interactive installers, debuggers, and TUI apps via PTY.",
+      "version": "0.4.0",
+      "keywords": ["tui", "pty", "repl", "automation", "terminal"]
     }
   ]
 }
