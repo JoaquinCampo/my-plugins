@@ -153,15 +153,15 @@ For each distinct recording from B, run the type-appropriate show. No cap, no sa
 
 If a recording type appears that isn't listed, fall back to `basecamp show <type> <id> --in <project_id> --json`. If `show` fails, log and skip that recording, do not abort.
 
-**Step D. Walk every chat with activity**
+**Step D. Walk every chat room with activity**
 ```
-basecamp chat --in <project_id> --json
+basecamp chat list --in <project_id> --json
 ```
-For each chat returned, fetch:
+This returns all chat rooms (Dev Chat, side rooms, campfires). For each room returned, fetch its recent messages:
 ```
-basecamp chat messages --chat <chat_id> --limit 200 --md
+basecamp chat messages --in <project_id> --room <room_id> --limit 200 --md
 ```
-Filter to last 7 days client-side. If a chat had zero activity in window, skip it. Otherwise include every message in window.
+(`--room` is needed only when the project has multiple rooms; safe to always pass it.) Filter to last 7 days client-side. If a room had zero activity in window, skip it. Otherwise include every message in window.
 
 **Step E. Context the timeline does not catch**
 
