@@ -1,0 +1,9 @@
+{
+  "name": "project-report",
+  "version": "0.1.0",
+  "description": "High-level weekly Basecamp project status report.",
+  "author": { "name": "Joaquin Campo" },
+  "license": "MIT",
+  "keywords": ["basecamp", "report", "status", "weekly"],
+  "skills": "./skills/"
+}
