@@ -685,3 +685,9 @@ These are explicitly deferred per the spec. If the urge arises during implementa
 - Onboarding doc for the skill itself (separate deliverable Agustín requested).
 - Templates or per-project customization.
 - A standalone GitHub repo for this plugin (it lives in `my-plugins` for v1).
+
+---
+
+## Status: complete (2026-05-29)
+
+All 11 tasks executed. SKILL.md is `project-report/skills/project-report/SKILL.md`. Plugin registered in `.claude-plugin/marketplace.json`. End-to-end manual walkthrough against the Qdrant project (`Researching Search 2.0`, project 44862682) passed the rubric. Two CLI bugs found in v0.7.2 (typed-show `--all-comments` flag missing; `question` not supported by generic show) were patched in Task 10 and re-verified live. 12 commits on `main`, not yet pushed.
