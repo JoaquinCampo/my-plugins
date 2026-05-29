@@ -16,7 +16,7 @@ The trigger for this spec is feedback on a previous Parsan.ai report (produced b
 | Audience | Lead / outsider | Matches Agustín feedback. Not for someone already deep in the project. |
 | Time horizon | Last 7 days, retrospective only | Simplest v1. Roadmap framing deferred. |
 | Output venue | Markdown printed in terminal | Skill prints, user copy-pastes wherever (Basecamp, Slack, doc). No posting permissions or draft/publish logic. |
-| Shape | 3 sections | TL;DR, Blockers & decisions needed, Gaps Basecamp can't see. |
+| Shape | 4 sections (revised 2026-05-29) | TL;DR, What happened, Blockers & decisions needed, Gaps Basecamp can't see. Originally 3; "What happened" added after the first Qdrant test showed the lean shape stripped too much concrete texture. |
 | Invocation | `/project-report <url-or-id>` | Dedicated slash command. Easy to remember. Clean separation from `/basecamp`. |
 | Location | Personal marketplace `JoaquinCampo/my-plugins` | Local plugin folder, registered in marketplace.json. Same shape as `browser-use`, `humanizer`. |
 | Approach | Prompt-only skill (SKILL.md as playbook) | Fastest to iterate on prompt while we tune "high-level". Add helper scripts only if the prompt feels brittle. |
@@ -47,7 +47,7 @@ Add to the `plugins` array:
 {
   "name": "project-report",
   "source": "./project-report",
-  "description": "Generate a high-level weekly status report for a Basecamp project. Activity-first via the basecamp CLI; outputs a lean 3-section markdown report (TL;DR, blockers, gaps).",
+  "description": "Generate a high-level weekly status report for a Basecamp project. Activity-first via the basecamp CLI; outputs a lean 4-section markdown report (TL;DR, what happened, blockers, gaps).",
   "version": "0.1.0",
   "keywords": ["basecamp", "report", "status", "weekly", "project-management"]
 }
@@ -79,9 +79,9 @@ name: project-report
 description: |
   Generate a high-level weekly status report for a Basecamp project. Reader is a
   lead or outsider, not someone in the project's daily work. Outputs a lean
-  3-section markdown report (TL;DR, Blockers & decisions needed, Gaps Basecamp
-  can't see). Last 7 days only, retrospective. Requires the basecamp CLI
-  installed and authenticated.
+  4-section markdown report (TL;DR, What happened, Blockers & decisions needed,
+  Gaps Basecamp can't see). Last 7 days only, retrospective. Requires the
+  basecamp CLI installed and authenticated.
 triggers:
   - /project-report
   - project-report
@@ -191,7 +191,7 @@ These are signals where "no activity" is itself the signal (stuck work).
 
 **Step F. Synthesize**
 
-The model now has: project metadata, weekly activity index, full content + comments for everything touched, full chat transcripts in window, open and stuck work. Write the 3-section report per the template below.
+The model now has: project metadata, weekly activity index, full content + comments for everything touched, full chat transcripts in window, open and stuck work. Write the 4-section report per the template below.
 
 ### 5. Output template (strict)
 

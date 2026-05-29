@@ -3,9 +3,9 @@ name: project-report
 description: |
   Generate a high-level weekly status report for a Basecamp project. Reader is a
   lead or outsider, not someone in the project's daily work. Outputs a lean
-  3-section markdown report (TL;DR, Blockers & decisions needed, Gaps Basecamp
-  can't see). Last 7 days only, retrospective. Requires the basecamp CLI
-  installed and authenticated.
+  4-section markdown report (TL;DR, What happened, Blockers & decisions needed,
+  Gaps Basecamp can't see). Last 7 days only, retrospective. Requires the
+  basecamp CLI installed and authenticated.
 triggers:
   - /project-report
   - project-report
@@ -20,7 +20,7 @@ argument-hint: "<basecamp-project-url-or-id>"
 
 # /project-report, High-level Basecamp weekly report
 
-Generate a lean 3-section weekly status report for a Basecamp project, written for a reader who is NOT in the project's daily work. Last 7 days only. Read-only: this skill never posts to Basecamp.
+Generate a lean 4-section weekly status report for a Basecamp project, written for a reader who is NOT in the project's daily work. Last 7 days only. Read-only: this skill never posts to Basecamp.
 
 ## When to use
 
@@ -165,7 +165,17 @@ If the project has no card tables, skip this entirely.
 
 ### Step E. Synthesize
 
-You now have: project header, weekly activity index, full content + comments for every touched recording, full chat transcripts in window, open and potentially stuck work. Write the 3-section report per the template in the next section.
+You now have: project header, weekly activity index, full content + comments for every touched recording, full chat transcripts in window, open and potentially stuck work.
+
+Before writing, internally answer three questions (do NOT include the answers as a section in the output, they are pre-writing reasoning):
+
+1. **What is this project for?** Use the project description and the dock contents (kanban boards, chats, questionnaires) to infer the project's purpose in one sentence. Example: "research project investigating embedding models for Pento's search vertical." If the description is empty and the dock contents do not betray a clear purpose, write "purpose unclear from Basecamp" and move on.
+
+2. **What posture is the project in this week?** Pick ONE word or short phrase from the activity mix: research, building, iterating, debugging, shipping, ramping up, idle, stuck, winding down. Posture is derived from VOLUME and TYPE of activity, not from any one recording's content. A week with 80 chat messages and one closed card is "iterating in chat"; a week with one new message and no other activity is "idle"; a week with 5 todos completed and a new milestone created is "shipping". Be honest. "Idle" is a valid answer.
+
+3. **Where did the week's substance actually live?** Chat messages, in-progress comments on todos, debate on cards, or polished recordings closed this week? Live activity (chat, comments-in-window) usually outweighs whatever single recording has the nicest text. Closed/completed recordings often document work done weeks earlier; they are milestones, not the week's substance. Lead the TL;DR with the substance, not the milestone.
+
+Then write the report per the template in the next section.
 
 ## Output template (strict)
 
@@ -175,15 +185,19 @@ Print this to the terminal verbatim, filling in the placeholders. No deviations 
 # <Project name>, week of <YYYY-MM-DD> to <YYYY-MM-DD>
 
 ## TL;DR
-<2-3 sentences. Must explicitly answer: is this project on track? Lead with the headline of what mattered this week.>
+<1 to 2 sentences. The headline of the week: project posture (research, building, debugging, shipping, idle, stuck, etc.) plus the one thing that defines the week. Lead with substance, not a polished milestone.>
+
+## What happened
+<3 to 6 bullets. Concrete texture so a cold reader sees the week's shape: who was active, what was attempted, what closed, what was debated, what was quiet. Specificity matters: "ran training experiments that mostly did not complete" beats "iterated on the model". Numbers help when they are signal: "79 messages of live experimentation in one chat" beats "active chat".>
+<Each bullet stands alone. Do NOT enumerate per-todo or per-card; group by theme.>
+<If a track was silent, name it: "Marketing chat had zero activity this week." Silence is information.>
 
 ## Blockers & decisions needed
-- <Theme, not ticket. What is stuck or waiting on a human call.>
-- <Each bullet: short statement + a sentence of why.>
-- <If nothing is blocked: a single bullet that says so.>
+- <A blocker is a real, specific decision waiting on a human outside the team, or an external dependency. Examples that ARE blockers: "client has not approved the deploy", "legal review is pending", "waiting on a third-party API key", "decision needed from <stakeholder> on <choice>". Examples that are NOT blockers: internal engineering choices the team can resolve themselves, stale todos that nobody is waiting on, questions that have not been formally asked.>
+- <If there are no real blockers, write a single bullet: "No blockers this week." Do NOT invent decision pressure. The posture and concrete texture already live in TL;DR and What happened; do not repeat them here.>
 
 ## Gaps Basecamp can't see
-- <Honest callouts: "this looks decided in Slack", "no client confirmation visible", "X is assigned but no activity logged in 7d".>
+- <Honest callouts about what is invisible to a Basecamp-only view: "this looks decided in Slack", "no client confirmation visible", "X is assigned but no activity logged in 7d", "polished card documents work done earlier; the messy in-progress reasoning is in chat".>
 - <If nothing to flag: "No obvious gaps this week.">
 ```
 
@@ -193,7 +207,12 @@ These are non-negotiable. Apply them while drafting the report.
 
 - **No Basecamp IDs in prose.** Themes only. A specific URL link is allowed when a single recording is the load-bearing reference, sparingly.
 - **No per-todo enumeration.** If 8 todos all touch the same theme, that is one bullet.
-- **TL;DR answers "is it on track" explicitly.** It is not just a summary.
+- **Lead-altitude test.** Would a reader who knows nothing about the project's tech understand what mattered this week? If a bullet contains an algorithm name, a library name, a parameter name, a function name, or any other engineering jargon, you are too low. Compress to outcome and posture.
+- **Specificity required even at lead altitude.** Avoid jargon, not specifics. A cold reader should be able to verify the report against reality. "Research mode" alone is too thin; "ran training experiments that mostly did not complete, plus visualization debate with a senior engineer" is the right altitude. Numbers help when they are signal ("79 chat messages this week" tells a posture story; "comment_id 9889012" is noise).
+- **Do NOT claim "on track" or "off track".** You don't have a destination (no roadmap, no prior week baseline). Describe posture and substance, not progress against an absent goal.
+- **Live activity outweighs polished recordings.** Whatever recording has the nicest prose may document work finished weeks ago and merely closed this week. The real week often lives in chat, in unresolved comment threads, or in todos with no completion. Lead with the messy live activity, not the tidy closed milestone.
+- **Do not invent narrative structure.** If you want to write "research moved but product did not", you must be able to cite evidence in the gathered data that "product work" exists in this project. Two unrelated stale todos do not constitute a "product surface". If you cannot cite the data backing a frame, do not frame it.
+- **Report low-activity weeks honestly.** A quiet week is information. Saying "the team was heads-down in research, with one milestone closed and no other tracks moving" is more useful than padding with manufactured drama. Silence is data; surface it.
 - **Gaps section is required.** Write the "no obvious gaps" line rather than omitting the section.
 - **No filler.** If a section has nothing real to say, say so in one line. Do not pad.
 - **No em-dashes.** Use commas, periods, semicolons, or parentheses.
