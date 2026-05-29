@@ -91,20 +91,35 @@ Filter the returned events client-side to the last 7 days (inclusive: `<start_da
 
 ### Step B. Deep-dive on every touched recording
 
-For each distinct recording from Step A, run the type-appropriate show. No cap, no sampling. Use `--all-comments` on every commentable type to fetch the full comment history (default is capped at 100).
+For each distinct recording from Step A, run the type-appropriate show, then separately fetch its comments (in CLI v0.7.2 typed `show` commands do NOT accept `--all-comments`; comments must be fetched via the dedicated `comments list` endpoint). No cap, no sampling.
 
-| Recording type | Command |
+**Show the recording:**
+
+| Recording type | Show command |
 |---|---|
-| todo | `basecamp todos show <id> --all-comments --json` |
-| card | `basecamp cards show <id> --all-comments --json` |
-| message | `basecamp messages show <id> --all-comments --json` |
-| document | `basecamp show document <id> --all-comments --json` |
-| upload | `basecamp files show <id> --in <project_id> --json` |
-| schedule entry | `basecamp schedule show <id> --in <project_id> --json` |
-| comment | Already attached to its parent recording above; do not refetch. |
+| todo | `basecamp todos show <id> --in <project_id> --md` |
+| card | `basecamp cards show <id> --in <project_id> --md` |
+| message | `basecamp messages show <id> --in <project_id> --md` |
+| document | `basecamp show document <id> --in <project_id> --md` |
+| upload | `basecamp files show <id> --in <project_id> --md` |
+| schedule entry | `basecamp show schedule-entry <id> --in <project_id> --md` |
+| check-in question | `basecamp checkins question <id> --in <project_id> --md` |
+| comment | Already attached via the comments fetch below; do not refetch. |
 | chat line | Covered by Step C below. |
 
-If a recording type appears that is not in the table, fall back to `basecamp show <type> <id> --in <project_id> --json`. If any single `show` call fails, log it and skip that recording; do NOT abort the report.
+If a recording type appears that is not in the table, fall back to `basecamp show <type> <id> --in <project_id> --md`. Generic `basecamp show` supports these types: `todo, todolist, message, comment, card, card-table, document, schedule-entry, checkin, forward, upload, vault, chat, line`. It does NOT support `question`: for that use `basecamp checkins question <id>` as shown above. If any single show call fails, log it and skip that recording; do NOT abort the report.
+
+**Then fetch comments for every commentable recording above** (todo, card, message, document):
+
+```bash
+basecamp comments list <id> --in <project_id> --all --json
+```
+
+`--all` paginates through the full comment history. For check-in questions, fetch answers instead:
+
+```bash
+basecamp checkins answers <id> --in <project_id> --all --md
+```
 
 ### Step C. Walk every chat room with activity
 
