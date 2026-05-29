@@ -151,3 +151,36 @@ If the project has no card tables, skip this entirely.
 ### Step E. Synthesize
 
 You now have: project header, weekly activity index, full content + comments for every touched recording, full chat transcripts in window, open and potentially stuck work. Write the 3-section report per the template in the next section.
+
+## Output template (strict)
+
+Print this to the terminal verbatim, filling in the placeholders. No deviations from the structure. The whole report is a single markdown block.
+
+```
+# <Project name>, week of <YYYY-MM-DD> to <YYYY-MM-DD>
+
+## TL;DR
+<2-3 sentences. Must explicitly answer: is this project on track? Lead with the headline of what mattered this week.>
+
+## Blockers & decisions needed
+- <Theme, not ticket. What is stuck or waiting on a human call.>
+- <Each bullet: short statement + a sentence of why.>
+- <If nothing is blocked: a single bullet that says so.>
+
+## Gaps Basecamp can't see
+- <Honest callouts: "this looks decided in Slack", "no client confirmation visible", "X is assigned but no activity logged in 7d".>
+- <If nothing to flag: "No obvious gaps this week.">
+```
+
+## Writing rules
+
+These are non-negotiable. Apply them while drafting the report.
+
+- **No Basecamp IDs in prose.** Themes only. A specific URL link is allowed when a single recording is the load-bearing reference, sparingly.
+- **No per-todo enumeration.** If 8 todos all touch the same theme, that is one bullet.
+- **TL;DR answers "is it on track" explicitly.** It is not just a summary.
+- **Gaps section is required.** Write the "no obvious gaps" line rather than omitting the section.
+- **No filler.** If a section has nothing real to say, say so in one line. Do not pad.
+- **No em-dashes.** Use commas, periods, semicolons, or parentheses.
+- **Language.** Default to English. If the user invoked the skill in Spanish (their triggering message contains Spanish), write the report in Spanish.
+- **No meta-commentary.** Do not narrate what you are about to do or summarize what you just did. The output IS the report.
