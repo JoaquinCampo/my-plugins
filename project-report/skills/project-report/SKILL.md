@@ -184,3 +184,19 @@ These are non-negotiable. Apply them while drafting the report.
 - **No em-dashes.** Use commas, periods, semicolons, or parentheses.
 - **Language.** Default to English. If the user invoked the skill in Spanish (their triggering message contains Spanish), write the report in Spanish.
 - **No meta-commentary.** Do not narrate what you are about to do or summarize what you just did. The output IS the report.
+
+## Error handling
+
+| Condition | Behavior |
+|---|---|
+| Argument missing | Ask the user for a Basecamp project URL or ID. Stop. |
+| URL parse fails | Surface the CLI's error verbatim. Suggest checking the URL. Stop. |
+| `command -v basecamp` fails | Print the exact "CLI not installed" message from the Preflight section. Stop. |
+| `basecamp auth status` fails | Print the exact "not authenticated" message from the Preflight section. Stop. |
+| Project not found (CLI exit 2) | "You don't appear to have access to this Basecamp project. Check the URL and your account with `basecamp accounts list`." Stop. |
+| Forbidden (CLI exit 4) | Same message as Project not found. Stop. |
+| Rate limit (CLI exit 5) | The CLI handles backoff automatically. If a call still fails, surface the message and stop. Do not retry blindly. |
+| Single `show` call fails mid-walk | Log internally and skip that recording. Continue. Mention in the Gaps section if at least one was skipped: "Could not read N item(s) from Basecamp." |
+| Empty week (no events in window) | Still produce a report. TL;DR: "No activity recorded in Basecamp this week." Gaps section calls out that work may have happened off-Basecamp. |
+
+Do not invent error messages beyond these. If the situation is none of the above, surface the CLI's raw error and stop.
