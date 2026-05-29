@@ -46,6 +46,13 @@
       "keywords": ["swiftui", "ios", "macos", "visionos", "apple", "foundation-models", "approuter", "ios26"]
     },
     {
+      "name": "project-report",
+      "source": "./project-report",
+      "description": "Generate a high-level weekly status report for a Basecamp project. Activity-first via the basecamp CLI; outputs a lean 3-section markdown report (TL;DR, blockers, gaps).",
+      "version": "0.1.0",
+      "keywords": ["basecamp", "report", "status", "weekly", "project-management"]
+    },
+    {
       "name": "agent-debugger",
       "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debugger.git" },
       "description": "Pause execution and inspect runtime state via DAP. Attach to live processes by PID, no restart or code changes required.",
