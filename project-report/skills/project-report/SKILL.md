@@ -51,3 +51,25 @@ If this fails (non-zero exit or output indicates unauthenticated), stop with thi
 > Basecamp CLI is installed but not authenticated. Run `basecamp auth login` (full setup at https://github.com/basecamp/basecamp-cli), then re-run `/project-report`.
 
 Do NOT run `basecamp doctor` in v1. The two checks above are sufficient and keep latency low.
+
+## Resolve the project
+
+Given the invocation argument:
+
+- **Basecamp URL** (e.g., `https://3.basecamp.com/<account>/projects/<id>`): run
+  ```bash
+  basecamp url parse "<url>" --json
+  ```
+  Extract `project_id` from the response. If the parse fails, surface the CLI error verbatim to the user and stop.
+
+- **Bare numeric ID**: use it directly as `project_id`. No parse step needed.
+
+- **Missing argument**: ask the user for a Basecamp project URL or ID. Do not guess.
+
+Fetch the project header for the report title:
+
+```bash
+basecamp projects show <project_id> --md
+```
+
+Hold onto the project name. The report title is `# <Project name>, week of <start_date> to <end_date>`, where `<end_date>` is today (UTC date) and `<start_date>` is 6 days before (so the window is exactly 7 calendar days inclusive).
