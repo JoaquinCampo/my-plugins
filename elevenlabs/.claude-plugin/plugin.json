@@ -1,0 +1,9 @@
+{
+  "name": "elevenlabs",
+  "version": "0.1.0",
+  "description": "ElevenLabs development skills: official vendored skills plus live-docs gap skills covering the full product surface.",
+  "author": { "name": "Joaquin Campo", "email": "jcampo@pento.ai" },
+  "license": "MIT",
+  "keywords": ["elevenlabs", "tts", "speech-to-text", "voice", "audio", "agents", "music"],
+  "skills": "./skills/"
+}

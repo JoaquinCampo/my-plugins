@@ -53,6 +53,13 @@
       "keywords": ["basecamp", "report", "status", "weekly", "project-management"]
     },
     {
+      "name": "elevenlabs",
+      "source": "./elevenlabs",
+      "description": "Full ElevenLabs coverage for building with the API: the 9 official ElevenLabs agent skills (vendored, re-syncable) plus gap skills that pull live docs indexes for voices, dubbing, dialogue, studio, admin, SDKs, image-video, Reception AI, and a docs-lookup catch-all.",
+      "version": "0.1.0",
+      "keywords": ["elevenlabs", "tts", "speech-to-text", "voice", "audio", "agents", "music"]
+    },
+    {
       "name": "agent-debugger",
       "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debugger.git" },
       "description": "Pause execution and inspect runtime state via DAP. Attach to live processes by PID, no restart or code changes required.",
