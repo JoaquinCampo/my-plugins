@@ -50,7 +50,10 @@ my-plugins/
 │       ├── text-to-dialogue/
 │       ├── studio/
 │       ├── admin/
-│       └── sdks-integrations/
+│       ├── sdks-integrations/
+│       ├── image-video/
+│       ├── reception-ai/
+│       └── docs-lookup/
 └── docs/specs/2026-06-11-elevenlabs-plugin-design.md   # this file
 ```
 
@@ -67,16 +70,19 @@ Run manually when an update is wanted; not wired to any hook.
 
 ## Gap skills
 
-Six skills, one per docs area the official skills do not cover:
+Nine skills, one per docs area the official skills do not cover, plus a catch-all. (The list grew from six during implementation research: the docs index revealed `image-video`, `reception-ai`, and the 310-page API reference as uncovered areas; `docs-lookup` future-proofs against new products.) Injection sources were verified live on 2026-06-11; all section indexes are 1-10KB.
 
-| Skill | Docs area |
-|---|---|
-| `voices` | Voice cloning, voice design, remixing, voice library |
-| `dubbing` | Audio/video translation |
-| `text-to-dialogue` | Multi-speaker dialogue |
-| `studio` | Creative studio, audiobooks, flows, transcripts, subtitles |
-| `admin` | Workspaces, SSO, billing, data residency, usage APIs |
-| `sdks-integrations` | SDK references (JS, Python, React, React Native, Kotlin, Swift), platform integrations (Twilio, Slack, no-code) |
+| Skill | Docs area | Injection source |
+|---|---|---|
+| `voices` | Voice cloning, voice design, remixing, voice library | `eleven-creative/voices/llms.txt` (1.4KB) + capability overview page URLs in body |
+| `dubbing` | Audio/video translation | grep `-i dub` over full `llms.txt` (no dedicated section; pages span capabilities, creative, productions, api-reference) |
+| `text-to-dialogue` | Multi-speaker dialogue | grep `-i dialogue` over full `llms.txt` |
+| `studio` | Creative studio, audiobooks, flows, transcripts, subtitles, audio native | `eleven-creative/llms.txt` (6.4KB) |
+| `admin` | Workspaces, SSO, billing, data residency, usage analytics | `overview/administration/llms.txt` (3.3KB) |
+| `sdks-integrations` | SDK quickstarts and cookbooks (JS, Python, React, React Native, Kotlin, Swift), platform integrations | `eleven-api/llms.txt` (10KB) |
+| `image-video` | Image and video generation, avatars | grep `-iE 'image|video|avatar'` over full `llms.txt` |
+| `reception-ai` | Reception AI product | `reception-ai/llms.txt` (4.4KB) |
+| `docs-lookup` | Catch-all: API endpoint reference (310 pages), forced alignment, and anything new ElevenLabs ships | No injection; instructs grep-filtering the full `llms.txt` (112KB, never fetched whole into context) for any topic, then fetching specific `.md` pages |
 
 Each SKILL.md follows this shape:
 
@@ -103,7 +109,7 @@ Current documentation index for this area:
 
 Skill `name` matches its folder (the plugin namespace yields `elevenlabs:dubbing` etc.); the `description` carries the auto-trigger specificity, always mentioning "ElevenLabs" plus the concrete tasks the area covers.
 
-Exact section URLs are verified during implementation: for each area, confirm `https://elevenlabs.io/docs/<section>/llms.txt` exists and is small; if a section lacks its own `llms.txt`, point the injection at the most relevant index page's `.md` URL instead. If an area's index turns out to be very large (the agents section reportedly has 100+ pages, though that area is covered by the vendored skill), the injection narrows to a subpath.
+Injection sources were verified live on 2026-06-11 (see the table above). Areas without a dedicated docs section (dubbing, dialogue, image-video) inject a grep filter over the full `llms.txt` instead, which yields exactly the matching page list without pulling the 112KB index into context.
 
 ## marketplace.json entry
 
