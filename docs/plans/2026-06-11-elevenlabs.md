@@ -20,7 +20,7 @@
 - Create: `elevenlabs/.claude-plugin/plugin.json`
 - Modify: `.claude-plugin/marketplace.json` (add entry to the `plugins` array)
 
-- [ ] **Step 1: Create plugin.json**
+- [x] **Step 1: Create plugin.json**
 
 Create `elevenlabs/.claude-plugin/plugin.json`:
 
@@ -36,7 +36,7 @@ Create `elevenlabs/.claude-plugin/plugin.json`:
 }
 ```
 
-- [ ] **Step 2: Add marketplace entry**
+- [x] **Step 2: Add marketplace entry**
 
 In `.claude-plugin/marketplace.json`, append this object to the `plugins` array (after the last existing local plugin entry, keep valid JSON commas):
 
@@ -50,12 +50,12 @@ In `.claude-plugin/marketplace.json`, append this object to the `plugins` array 
 }
 ```
 
-- [ ] **Step 3: Verify both files parse**
+- [x] **Step 3: Verify both files parse**
 
 Run: `jq -e .name elevenlabs/.claude-plugin/plugin.json && jq -e '.plugins[] | select(.name == "elevenlabs") | .source' .claude-plugin/marketplace.json`
 Expected: prints `"elevenlabs"` then `"./elevenlabs"`. Non-zero exit means broken JSON; fix before proceeding.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add elevenlabs/.claude-plugin/plugin.json .claude-plugin/marketplace.json
@@ -72,7 +72,7 @@ git commit -m "feat(elevenlabs): plugin scaffold and marketplace entry"
 
 Upstream facts (verified 2026-06-11): `https://github.com/elevenlabs/skills` has the 9 skill folders at repo root (`agents`, `music`, `setup-api-key`, `sound-effects`, `speech-engine`, `speech-to-text`, `text-to-speech`, `voice-changer`, `voice-isolator`), each containing `SKILL.md` (standard frontmatter, MIT) and usually `references/`. Non-skill items at root (`.agents/`, `evals/`, `README.md`, etc.) must NOT be copied; that is why the script copies by allowlist.
 
-- [ ] **Step 1: Write the sync script**
+- [x] **Step 1: Write the sync script**
 
 Create `elevenlabs/scripts/sync-official-skills.sh`:
 
@@ -115,17 +115,17 @@ echo "Local changes (empty means already up to date):"
 git -C "$PLUGIN_DIR" status --short -- skills/
 ```
 
-- [ ] **Step 2: Make it executable and lint it**
+- [x] **Step 2: Make it executable and lint it**
 
 Run: `chmod +x elevenlabs/scripts/sync-official-skills.sh && bash -n elevenlabs/scripts/sync-official-skills.sh && echo SYNTAX-OK`
 Expected: `SYNTAX-OK`
 
-- [ ] **Step 3: Run the sync**
+- [x] **Step 3: Run the sync**
 
 Run: `./elevenlabs/scripts/sync-official-skills.sh`
 Expected: `Synced 9 skills from https://github.com/elevenlabs/skills` followed by `??`/`A` lines for the 9 new folders under `elevenlabs/skills/`.
 
-- [ ] **Step 4: Verify the vendored skills are intact**
+- [x] **Step 4: Verify the vendored skills are intact**
 
 Run:
 
@@ -138,7 +138,7 @@ done
 
 Expected: 9 lines, all `OK`. Any `BROKEN` line means the upstream format changed; stop and inspect that folder.
 
-- [ ] **Step 5: Verify idempotency**
+- [x] **Step 5: Verify idempotency**
 
 Run the script a second time, then compare:
 
@@ -151,7 +151,7 @@ diff /tmp/sync1.txt /tmp/sync2.txt && echo IDEMPOTENT
 
 Expected: `IDEMPOTENT` (re-running changes nothing).
 
-- [ ] **Step 6: Commit script and vendored skills**
+- [x] **Step 6: Commit script and vendored skills**
 
 ```bash
 git add elevenlabs/scripts/sync-official-skills.sh elevenlabs/skills/
@@ -171,7 +171,7 @@ git commit -m "feat(elevenlabs): sync script and vendored official skills"
 
 These five inject a dedicated section `llms.txt` (all verified live on 2026-06-11, sizes 1.4-10KB). The `` !`...` `` line runs at skill invocation, before Claude sees the content, and its output is injected inline. YAML note: keep frontmatter `description` free of `: ` sequences (plain scalars break on colon-space).
 
-- [ ] **Step 1: Create voices skill**
+- [x] **Step 1: Create voices skill**
 
 Create `elevenlabs/skills/voices/SKILL.md`:
 
@@ -202,7 +202,7 @@ Also relevant; fetch directly if the task needs them:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 2: Create studio skill**
+- [x] **Step 2: Create studio skill**
 
 Create `elevenlabs/skills/studio/SKILL.md`:
 
@@ -228,7 +228,7 @@ Current docs index for the ElevenCreative platform:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 3: Create admin skill**
+- [x] **Step 3: Create admin skill**
 
 Create `elevenlabs/skills/admin/SKILL.md`:
 
@@ -254,7 +254,7 @@ Current docs index for account, billing, and workspace administration:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 4: Create sdks-integrations skill**
+- [x] **Step 4: Create sdks-integrations skill**
 
 Create `elevenlabs/skills/sdks-integrations/SKILL.md`:
 
@@ -282,7 +282,7 @@ Current docs index for SDK quickstarts and cookbooks:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 5: Create reception-ai skill**
+- [x] **Step 5: Create reception-ai skill**
 
 Create `elevenlabs/skills/reception-ai/SKILL.md`:
 
@@ -306,7 +306,7 @@ Current docs index for Reception AI:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 6: Verify every injection command works and is right-sized**
+- [x] **Step 6: Verify every injection command works and is right-sized**
 
 Run:
 
@@ -320,7 +320,7 @@ done
 
 Expected: five lines, each between 1000 and 15000 bytes, none containing `FETCH FAILED`. A 0 or a failure line means the URL or the command quoting is wrong; fix before committing.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add elevenlabs/skills/voices elevenlabs/skills/studio elevenlabs/skills/admin elevenlabs/skills/sdks-integrations elevenlabs/skills/reception-ai
@@ -339,7 +339,7 @@ git commit -m "feat(elevenlabs): section-index gap skills"
 
 These areas have no dedicated docs section; their pages span capabilities, ElevenCreative, Productions, and the API reference. The injection greps the full `llms.txt` (112KB stays in the shell; only matching lines reach context). `docs-lookup` injects nothing; it teaches the same filter technique for any topic.
 
-- [ ] **Step 1: Create dubbing skill**
+- [x] **Step 1: Create dubbing skill**
 
 Create `elevenlabs/skills/dubbing/SKILL.md`:
 
@@ -363,7 +363,7 @@ All dubbing-related pages in the current docs index:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 2: Create text-to-dialogue skill**
+- [x] **Step 2: Create text-to-dialogue skill**
 
 Create `elevenlabs/skills/text-to-dialogue/SKILL.md`:
 
@@ -387,7 +387,7 @@ All dialogue-related pages in the current docs index:
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 3: Create image-video skill**
+- [x] **Step 3: Create image-video skill**
 
 Create `elevenlabs/skills/image-video/SKILL.md`:
 
@@ -413,7 +413,7 @@ skill covers them):
 - If a fetch fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 4: Create docs-lookup skill**
+- [x] **Step 4: Create docs-lookup skill**
 
 Create `elevenlabs/skills/docs-lookup/SKILL.md`:
 
@@ -449,7 +449,7 @@ and return clean markdown):
 - If curl fails, fall back to WebFetch on the same URL.
 ```
 
-- [ ] **Step 5: Verify the grep injections return sane output**
+- [x] **Step 5: Verify the grep injections return sane output**
 
 Run:
 
@@ -463,7 +463,7 @@ done
 
 Expected: each between 3 and 80 lines, under 15000 bytes, no `FETCH FAILED`. Also confirm `docs-lookup/SKILL.md` contains no `` !` `` injection at all: `grep -c '!\`' elevenlabs/skills/docs-lookup/SKILL.md` prints `0`.
 
-- [ ] **Step 6: Verify all 9 gap skills have parseable frontmatter and folder-matching names**
+- [x] **Step 6: Verify all 9 gap skills have parseable frontmatter and folder-matching names**
 
 Run:
 
@@ -476,7 +476,7 @@ done
 
 Expected: 9 `OK` lines.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add elevenlabs/skills/dubbing elevenlabs/skills/text-to-dialogue elevenlabs/skills/image-video elevenlabs/skills/docs-lookup
@@ -490,7 +490,7 @@ git commit -m "feat(elevenlabs): grep-filter gap skills and docs-lookup catch-al
 **Files:**
 - Create: `elevenlabs/README.md`
 
-- [ ] **Step 1: Write the README**
+- [x] **Step 1: Write the README**
 
 Create `elevenlabs/README.md`:
 
@@ -539,7 +539,7 @@ Vendored skills are (c) ElevenLabs, MIT licensed:
 https://github.com/elevenlabs/skills
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add elevenlabs/README.md
@@ -552,32 +552,32 @@ git commit -m "docs(elevenlabs): plugin README"
 
 **Files:** none created; verification only.
 
-- [ ] **Step 1: Re-run the sync script to confirm it is a no-op on a clean tree**
+- [x] **Step 1: Re-run the sync script to confirm it is a no-op on a clean tree**
 
 Run: `./elevenlabs/scripts/sync-official-skills.sh && git status --short`
 Expected: `Synced 9 skills ...` and empty `git status --short` output (tree stays clean).
 
-- [ ] **Step 2: Refresh the installed marketplace and install the plugin**
+- [x] **Step 2: Refresh the installed marketplace and install the plugin**
 
 Run: `claude plugin marketplace update my-plugins && claude plugin install elevenlabs@my-plugins`
 Expected: both commands succeed; install reports the `elevenlabs` plugin added. If `marketplace update` complains the marketplace is a local path that has uncommitted state, commit first (all prior tasks end in commits, so the tree should be clean).
 
-- [ ] **Step 3: Smoke-test a gap skill end to end**
+- [x] **Step 3: Smoke-test a gap skill end to end**
 
 Run: `claude -p "Invoke the elevenlabs:docs-lookup skill, then give me the exact URL of the ElevenLabs API streaming reference page. Answer with the URL only."`
 Expected: output contains `https://elevenlabs.io/docs/api-reference/streaming`. This proves the skill loads under the plugin namespace and the filter-then-fetch flow works.
 
-- [ ] **Step 4: Smoke-test an injection skill**
+- [x] **Step 4: Smoke-test an injection skill**
 
 Run: `claude -p "Invoke the elevenlabs:admin skill and list the first three page titles from its injected docs index. Titles only."`
 Expected: three titles matching the administration section (e.g. Account, Billing, Pay As You Go). If the model reports a FETCH FAILED line, the injection broke; debug the curl command from Task 3 Step 6.
 
-- [ ] **Step 5: Smoke-test a vendored skill loads**
+- [x] **Step 5: Smoke-test a vendored skill loads**
 
 Run: `claude -p "Invoke the elevenlabs:text-to-speech skill and tell me which env var it requires. Answer with the env var name only."`
 Expected: `ELEVENLABS_API_KEY`.
 
-- [ ] **Step 6: Mark the plan complete**
+- [x] **Step 6: Mark the plan complete**
 
 Update this file's checkboxes, then:
 
