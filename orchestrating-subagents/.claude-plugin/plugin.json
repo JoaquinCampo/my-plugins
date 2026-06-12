@@ -1,0 +1,12 @@
+{
+  "name": "orchestrating-subagents",
+  "version": "0.1.0",
+  "description": "Doctrine for delegating token-heavy work to subagents: offload reading/authoring/review, maximize parallelism via dependency graphs, run maker/checker/fixer loops, and keep the main thread as a lean context manager.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["subagents", "orchestration", "parallelism", "delegation", "context-management"],
+  "skills": "./skills/"
+}

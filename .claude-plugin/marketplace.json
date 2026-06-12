@@ -60,6 +60,13 @@
       "keywords": ["elevenlabs", "tts", "speech-to-text", "voice", "audio", "agents", "music"]
     },
     {
+      "name": "orchestrating-subagents",
+      "source": "./orchestrating-subagents",
+      "description": "Doctrine for delegating token-heavy work to subagents: offload reading/authoring/review, maximize parallelism via dependency graphs, run maker/checker/fixer loops, and keep the main thread as a lean context manager.",
+      "version": "0.1.0",
+      "keywords": ["subagents", "orchestration", "parallelism", "delegation", "context-management"]
+    },
+    {
       "name": "agent-debugger",
       "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debugger.git" },
       "description": "Pause execution and inspect runtime state via DAP. Attach to live processes by PID, no restart or code changes required.",
