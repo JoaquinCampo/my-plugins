@@ -1,0 +1,11 @@
+{
+  "name": "writing-great-skills",
+  "version": "0.1.0",
+  "description": "Reference vocabulary and principles for writing and editing Claude Code skills well. Skill by Matt Pocock (github.com/mattpocock/skills), vendored.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcampo@pento.ai"
+  },
+  "license": "MIT",
+  "keywords": ["skills", "authoring", "writing", "meta", "claude-code"]
+}

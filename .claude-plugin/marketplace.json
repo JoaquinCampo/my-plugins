@@ -67,6 +67,20 @@
       "keywords": ["subagents", "orchestration", "parallelism", "delegation", "context-management"]
     },
     {
+      "name": "dev",
+      "source": "./dev",
+      "description": "Daily-driver development bundle: deep-module design and architecture-improvement scans (two skills by Matt Pocock, vendored), plus pr-review and orchestrating-subagents pulled in as dependencies.",
+      "version": "0.1.0",
+      "keywords": ["dev", "codebase-design", "architecture", "deep-modules", "daily-driver"]
+    },
+    {
+      "name": "writing-great-skills",
+      "source": "./writing-great-skills",
+      "description": "Reference vocabulary and principles for writing and editing Claude Code skills well. Skill by Matt Pocock, vendored.",
+      "version": "0.1.0",
+      "keywords": ["skills", "authoring", "writing", "meta", "claude-code"]
+    },
+    {
       "name": "agent-debugger",
       "source": { "source": "url", "url": "https://github.com/JoaquinCampo/agent-debugger.git" },
       "description": "Pause execution and inspect runtime state via DAP. Attach to live processes by PID, no restart or code changes required.",

@@ -1,0 +1,12 @@
+{
+  "name": "dev",
+  "version": "0.1.0",
+  "description": "Daily-driver development skills: deep-module design and architecture-improvement scans. Bundles two skills by Matt Pocock (github.com/mattpocock/skills, vendored) and pulls in pr-review and orchestrating-subagents as dependencies.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcampo@pento.ai"
+  },
+  "license": "MIT",
+  "keywords": ["dev", "codebase-design", "architecture", "deep-modules", "daily-driver"],
+  "dependencies": ["pr-review", "orchestrating-subagents"]
+}
