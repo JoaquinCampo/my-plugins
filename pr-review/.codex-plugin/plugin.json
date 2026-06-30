@@ -1,0 +1,30 @@
+{
+  "name": "pr-review",
+  "version": "0.1.0",
+  "description": "Pull-request review doctrine covering triage, lenses, severity, stop rules, agent tactics, context budget, tool escalation, review fan-out, and responsible non-review.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["pr-review", "code-review", "review", "agents", "doctrine"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PR Review",
+    "shortDescription": "Pull request review doctrine and agent tactics.",
+    "longDescription": "Pull request review plugin for triage, severity calibration, review lenses, stop rules, agent-assisted review fan-out, context-budget management, and responsible non-review decisions.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Review"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Review this pull request.",
+      "Triage these PR comments.",
+      "Fan out review agents."
+    ],
+    "brandColor": "#7C3AED"
+  }
+}

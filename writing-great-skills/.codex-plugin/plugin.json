@@ -1,0 +1,30 @@
+{
+  "name": "writing-great-skills",
+  "version": "0.1.0",
+  "description": "Reference vocabulary and principles for writing and editing Claude Code and Codex skills well.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcampo@pento.ai",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["skills", "authoring", "writing", "meta", "claude-code", "codex"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Writing Great Skills",
+    "shortDescription": "Reference guidance for writing and editing skills.",
+    "longDescription": "Skill-authoring reference for creating, editing, and improving agent skills, with vocabulary and principles adapted from Matt Pocock's vendored skill-writing guidance.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Review", "Write"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Improve this skill.",
+      "Review this SKILL.md.",
+      "Write a better skill description."
+    ],
+    "brandColor": "#14B8A6"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "tools",
+  "version": "0.1.0",
+  "description": "Daily agent tools: artifact creation, advisor review, browser automation, TUI automation, subagent orchestration, and Codex model routing.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["tools", "artifacts", "advisor", "browser", "tui", "subagents", "orchestration", "model-routing", "svg"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Tools",
+    "shortDescription": "Artifacts, advisor, browser/TUI automation, subagents, and model routing.",
+    "longDescription": "A practical tools bundle for creating polished visual artifacts, consulting a gpt-5.5 high-reasoning advisor, automating browsers and TUIs, orchestrating subagents, and routing Codex work across Spark, mini, 5.4, and 5.5.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Write", "Review"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Create a polished artifact.",
+      "Consult the advisor on this task.",
+      "Automate this browser or TUI flow."
+    ],
+    "brandColor": "#0F766E"
+  }
+}

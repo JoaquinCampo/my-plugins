@@ -1,0 +1,30 @@
+{
+  "name": "elevenlabs",
+  "version": "0.1.0",
+  "description": "ElevenLabs development skills: official vendored skills plus live-docs gap skills covering the full product surface.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcampo@pento.ai",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["elevenlabs", "tts", "speech-to-text", "voice", "audio", "agents", "music"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "ElevenLabs",
+    "shortDescription": "ElevenLabs API and product-surface development skills.",
+    "longDescription": "Development guidance for ElevenLabs APIs and product surfaces, including text to speech, speech to text, agents, voices, dubbing, sound effects, music, studio, SDKs, admin, and docs lookup workflows.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Build with the ElevenLabs API.",
+      "Look up ElevenLabs docs.",
+      "Set up ElevenLabs voice features."
+    ],
+    "brandColor": "#00A67E"
+  }
+}

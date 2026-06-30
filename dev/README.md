@@ -14,7 +14,7 @@ All by Matt Pocock, copied verbatim at commit `6eeb81b`.
 
 ## Pulls in (dependencies, not copied)
 
-`pr-review` and `orchestrating-subagents` are declared as dependencies, so installing `dev` installs and enables them too. They stay separate, independently installable plugins.
+`pr-review` and `tools` are declared as dependencies, so installing `dev` installs review plus the shared tools bundle.
 
 ## Re-sync
 

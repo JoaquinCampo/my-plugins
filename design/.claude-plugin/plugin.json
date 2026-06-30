@@ -1,0 +1,15 @@
+{
+  "name": "design",
+  "version": "0.1.0",
+  "description": "Design-focused frontend skills: shadcn/ui composition plus Impeccable design craft, audit, polish, and anti-pattern detection.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["design", "frontend", "ui", "shadcn", "impeccable"],
+  "skills": "./skills/",
+  "agents": [
+    "./agents/impeccable-manual-edit-applier.md"
+  ]
+}

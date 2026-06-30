@@ -1,0 +1,30 @@
+{
+  "name": "database",
+  "version": "0.1.0",
+  "description": "Database skills focused on Postgres performance, schema design, indexes, RLS, and query optimization.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["database", "postgres", "sql", "performance", "schema"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Database",
+    "shortDescription": "Postgres performance and schema guidance.",
+    "longDescription": "Database plugin for writing, reviewing, and optimizing Postgres queries, schema designs, indexes, connection management, RLS, and database configurations.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Review", "Write"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Review this Postgres schema.",
+      "Optimize this SQL query.",
+      "Check these RLS policies."
+    ],
+    "brandColor": "#3ECF8E"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "apple-dev",
+  "version": "0.1.0",
+  "description": "Modern SwiftUI doctrine plus recipes for Apple-platform development: no-ViewModel patterns, modular SwiftPM, Foundation Models on-device LLM, AppRouter navigation, iOS 26 Liquid Glass, encrypted push proxy, XcodeBuildMCP build verification, and ObservableObject-to-Observable refactor.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["swiftui", "ios", "macos", "visionos", "apple", "foundation-models", "approuter", "ios26", "swiftpm", "apple-intelligence"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Apple Dev",
+    "shortDescription": "SwiftUI and Apple-platform development skills.",
+    "longDescription": "Modern SwiftUI and Apple-platform development guidance covering no-ViewModel patterns, modular SwiftPM packages, Foundation Models, AppRouter, iOS 26 Liquid Glass, push proxy setup, XcodeBuildMCP build loops, and Observable refactors.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Write", "Review"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Review this SwiftUI architecture.",
+      "Add AppRouter navigation.",
+      "Set up an Xcode build loop."
+    ],
+    "brandColor": "#0A84FF"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "project-report",
+  "version": "0.1.0",
+  "description": "High-level weekly Basecamp project status report.",
+  "author": {
+    "name": "Joaquin Campo",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["basecamp", "report", "status", "weekly"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Project Report",
+    "shortDescription": "Weekly Basecamp project status reports.",
+    "longDescription": "Project reporting plugin for creating concise high-level weekly Basecamp status reports from project activity, blockers, and gaps.",
+    "developerName": "Joaquin Campo",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Create a weekly project report.",
+      "Summarize this Basecamp project.",
+      "Find blockers and gaps."
+    ],
+    "brandColor": "#EF4444"
+  }
+}

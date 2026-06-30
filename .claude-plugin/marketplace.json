@@ -11,13 +11,6 @@
   },
   "plugins": [
     {
-      "name": "browser-use",
-      "source": "./browser-use",
-      "description": "Drives the browser-use CLI for fast, persistent browser automation (navigation, forms, screenshots, data extraction).",
-      "version": "0.1.0",
-      "keywords": ["browser", "automation", "scraping", "e2e"]
-    },
-    {
       "name": "library-skills",
       "source": "./library-skills",
       "description": "Pulls in up-to-date official skills shipped by a project's installed libraries (FastAPI, Streamlit, etc.) via tiangolo/library-skills.",
@@ -60,16 +53,16 @@
       "keywords": ["elevenlabs", "tts", "speech-to-text", "voice", "audio", "agents", "music"]
     },
     {
-      "name": "orchestrating-subagents",
-      "source": "./orchestrating-subagents",
-      "description": "Doctrine for delegating token-heavy work to subagents: offload reading/authoring/review, maximize parallelism via dependency graphs, run maker/checker/fixer loops, and keep the main thread as a lean context manager.",
+      "name": "tools",
+      "source": "./tools",
+      "description": "Daily agent tools: artifact creation, advisor review, browser automation, TUI automation, subagent orchestration, and Codex model routing.",
       "version": "0.1.0",
-      "keywords": ["subagents", "orchestration", "parallelism", "delegation", "context-management"]
+      "keywords": ["tools", "artifacts", "advisor", "browser", "tui", "subagents", "orchestration", "model-routing", "svg"]
     },
     {
       "name": "dev",
       "source": "./dev",
-      "description": "Daily-driver development bundle: deep-module design and architecture-improvement scans (two skills by Matt Pocock, vendored), plus pr-review and orchestrating-subagents pulled in as dependencies.",
+      "description": "Daily-driver development bundle: deep-module design and architecture-improvement scans (two skills by Matt Pocock, vendored), plus pr-review and tools pulled in as dependencies.",
       "version": "0.1.0",
       "keywords": ["dev", "codebase-design", "architecture", "deep-modules", "daily-driver"]
     },
@@ -79,6 +72,20 @@
       "description": "Reference vocabulary and principles for writing and editing Claude Code skills well. Skill by Matt Pocock, vendored.",
       "version": "0.1.0",
       "keywords": ["skills", "authoring", "writing", "meta", "claude-code"]
+    },
+    {
+      "name": "design",
+      "source": "./design",
+      "description": "Design-focused frontend bundle: shadcn/ui composition plus Impeccable design craft, audit, polish, and anti-pattern detection.",
+      "version": "0.1.0",
+      "keywords": ["design", "frontend", "ui", "shadcn", "impeccable"]
+    },
+    {
+      "name": "database",
+      "source": "./database",
+      "description": "Database skills focused on Postgres performance, schema design, indexes, RLS, and query optimization.",
+      "version": "0.1.0",
+      "keywords": ["database", "postgres", "sql", "performance", "schema"]
     },
     {
       "name": "agent-debugger",
@@ -128,13 +135,6 @@
       "description": "Agent skills for building agents with LangChain, LangGraph, and Deep Agents.",
       "version": "0.1.0",
       "keywords": ["langchain", "langgraph", "deep-agents", "agents"]
-    },
-    {
-      "name": "tui-use",
-      "source": { "source": "url", "url": "https://github.com/onesuper/tui-use.git" },
-      "description": "TUI automation for AI agents: drive REPLs, interactive installers, debuggers, and TUI apps via PTY.",
-      "version": "0.4.0",
-      "keywords": ["tui", "pty", "repl", "automation", "terminal"]
     }
   ]
 }

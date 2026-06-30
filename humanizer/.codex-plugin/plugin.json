@@ -1,0 +1,30 @@
+{
+  "name": "humanizer",
+  "version": "2.5.1",
+  "description": "Strips AI-tell patterns from text, including em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, and similar patterns.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["writing", "editing", "ai-detection", "humanize", "prose"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Humanizer",
+    "shortDescription": "Remove AI-tell patterns from prose.",
+    "longDescription": "Writing and editing plugin for removing AI-tell patterns from prose, tightening phrasing, reducing inflated structure, and preserving the author's intended meaning.",
+    "developerName": "Joaquin Campo",
+    "category": "Writing",
+    "capabilities": ["Write", "Review"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Humanize this draft.",
+      "Remove AI-tell patterns.",
+      "Make this prose sound natural."
+    ],
+    "brandColor": "#F59E0B"
+  }
+}

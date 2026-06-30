@@ -1,0 +1,12 @@
+{
+  "name": "tools",
+  "version": "0.1.0",
+  "description": "Daily agent tools: artifact creation, advisor review, browser automation, TUI automation, subagent orchestration, and Codex model routing.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["tools", "artifacts", "advisor", "browser", "tui", "subagents", "orchestration", "model-routing", "svg"],
+  "skills": "./skills/"
+}

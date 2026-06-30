@@ -1,0 +1,30 @@
+{
+  "name": "library-skills",
+  "version": "0.1.0",
+  "description": "Pulls in up-to-date official skills shipped by a project's installed libraries through tiangolo/library-skills.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["library-skills", "deps", "version-sync", "fastapi", "streamlit"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Library Skills",
+    "shortDescription": "Load skills shipped by installed project libraries.",
+    "longDescription": "Dependency-aware skill discovery for projects that ship official agent skills, keeping framework and library guidance aligned with the versions installed in the current project.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Find skills for this project.",
+      "Use library-provided guidance.",
+      "Check installed dependency skills."
+    ],
+    "brandColor": "#10B981"
+  }
+}

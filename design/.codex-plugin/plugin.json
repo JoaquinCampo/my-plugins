@@ -1,0 +1,30 @@
+{
+  "name": "design",
+  "version": "0.1.0",
+  "description": "Design-focused frontend skills: shadcn/ui composition plus Impeccable design craft, audit, polish, and anti-pattern detection.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["design", "frontend", "ui", "shadcn", "impeccable"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Design",
+    "shortDescription": "Frontend design, shadcn/ui, and Impeccable craft skills.",
+    "longDescription": "Bundles a vendored shadcn/ui skill and Impeccable's frontend design craft, critique, polish, audit, and anti-pattern detection workflow.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Write", "Review"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Use shadcn/ui to build this component.",
+      "Polish this frontend with Impeccable.",
+      "Audit this UI for design issues."
+    ],
+    "brandColor": "#111827"
+  }
+}

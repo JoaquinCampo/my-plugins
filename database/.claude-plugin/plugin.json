@@ -1,0 +1,15 @@
+{
+  "name": "database",
+  "version": "0.1.0",
+  "description": "Database skills focused on Postgres performance, schema design, indexes, RLS, and query optimization.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["database", "postgres", "sql", "performance", "schema"],
+  "skills": "./skills/"
+}

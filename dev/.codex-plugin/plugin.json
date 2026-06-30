@@ -1,0 +1,30 @@
+{
+  "name": "dev",
+  "version": "0.1.0",
+  "description": "Daily-driver development skills: deep-module design and architecture-improvement scans, with review and tools doctrine.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcampo@pento.ai",
+    "url": "https://github.com/JoaquinCampo"
+  },
+  "homepage": "https://github.com/JoaquinCampo/my-plugins",
+  "repository": "https://github.com/JoaquinCampo/my-plugins",
+  "license": "MIT",
+  "keywords": ["dev", "codebase-design", "architecture", "deep-modules", "daily-driver"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dev",
+    "shortDescription": "Codebase design, architecture, review, and tools guidance.",
+    "longDescription": "Daily-driver development bundle for codebase design, architecture improvement, module boundaries, pull request review tactics, and tools workflows.",
+    "developerName": "Joaquin Campo",
+    "category": "Development",
+    "capabilities": ["Review", "Write"],
+    "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
+    "defaultPrompt": [
+      "Review this module design.",
+      "Improve this codebase architecture.",
+      "Use subagents for this feature."
+    ],
+    "brandColor": "#111827"
+  }
+}
