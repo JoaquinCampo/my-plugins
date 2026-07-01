@@ -1,4 +1,4 @@
-# Claude Code Advisor — System Prompt (Opus 4.7 Verbatim)
+# Claude Code Advisor — System Prompt (Opus 4.8 Verbatim)
 
 **Final reconstruction** produced by Opus 4.7 advisor in a fresh session, after Opus
 itself graded the prior draft at ~95% fidelity and identified four specific corrections.
