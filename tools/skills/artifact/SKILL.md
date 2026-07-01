@@ -1,6 +1,6 @@
 ---
 name: artifact
-description: Create distinctive, production-grade visual artifacts and Codex-built frontends. Use when building or improving HTML/CSS artifacts, React pages, dashboards, landing pages, explainers, demos, SVG diagrams, UI prototypes, or any visual output where design quality, subject-specific treatment, responsive behavior, and render verification matter.
+description: Use when building or improving HTML/CSS artifacts, React pages, dashboards, landing pages, explainers, demos, SVG diagrams, UI prototypes, or visual outputs where design quality, subject-specific treatment, responsive behavior, and render verification matter.
 ---
 
 # Artifact
@@ -18,6 +18,28 @@ Pick the treatment before choosing style:
 - **Conceptual explainer**: use diagrams, SVG, canvas, code, or animation to make the idea inspectable.
 
 Completion criterion: the chosen treatment is explicit in the design plan and the output matches that treatment.
+
+## Start With The User Mental Model
+
+Before layout or visuals, define what the viewer should understand at a glance:
+
+- **Viewer**: who is looking at this and what pressure they are under.
+- **Question**: the first question the artifact must answer.
+- **Action**: what the viewer can decide, do, or inspect next.
+- **Evidence**: the reason, source, state, or tradeoff that makes the action trustworthy.
+- **Depth path**: what belongs in the first view versus what belongs lower on the page, in a detail panel, or behind interaction.
+
+Write the artifact from the viewer's side of the screen. Users do not care how the system works behind the scenes unless that mechanism changes trust, timing, risk, or accountability.
+
+For operational explainers, prefer this order:
+
+1. What needs attention.
+2. Who owns it.
+3. Why it matters.
+4. Where to act.
+5. What happened after action.
+
+Completion criterion: the first viewport communicates the artifact's core idea without requiring a reader to understand implementation internals.
 
 ## Design Plan Before Code
 
@@ -66,6 +88,24 @@ Use Canvas or WebGL instead when the visual is high-volume, generative, particle
 
 Completion criterion: every SVG has a clear semantic reason to exist, no unreadable long path data unless unavoidable, and it remains legible at mobile and desktop widths.
 
+## Efficient SVG Iteration Loop
+
+SVGs fail when they are only technically valid. Treat complex SVG as an interface, not decoration.
+
+Use this loop for system maps, flows, architecture diagrams, timelines, or dense conceptual visuals:
+
+1. **Name the reader journey** in plain language, for example "prompt, route, review, decide, record."
+2. **List the semantic objects** before drawing, including actors, states, decisions, evidence, actions, and hidden support layers.
+3. **Assign visual priority**: primary user-facing objects are largest and highest contrast; implementation support is smaller, lower contrast, or lower on the canvas.
+4. **Block the SVG first** with boxes, circles, labels, and arrows. Do not tune paths, gradients, or ornament until the reading order works.
+5. **Render early** at desktop and mobile sizes. Inspect screenshots for clipped text, crossing connectors, tiny labels, and whether the first read is obvious.
+6. **Patch one layer at a time**: text fit, then object spacing, then connectors, then color, then polish. Avoid rewriting the whole SVG unless the mental model is wrong.
+7. **Keep a mobile strategy**: simplify, stack, or allow horizontal scroll for complex diagrams. Do not shrink dense SVG until labels become unreadable.
+
+Prefer real text, grouped layers, reusable classes, and short connector paths. Use curved connectors only when they improve reading order. If the diagram contains a user-facing workflow, make the user-facing surface visually dominant and make backend machinery secondary.
+
+Completion criterion: after desktop and mobile screenshots before completion, the SVG explains the idea at a glance, has no clipped text or collisions, and still preserves enough detail for inspection.
+
 ## Avoid Generic AI Aesthetics
 
 Avoid defaulting to:
@@ -103,6 +143,13 @@ Write from the user's side of the screen:
 - Labels use domain language, not implementation language.
 - Specific beats clever.
 - Use real content. Never use lorem unless the user asks for placeholder copy.
+
+## Gotchas
+
+- **Technically valid is not visually successful**: passing HTML, CSS, or SVG checks does not mean the artifact communicates. Render it and inspect the actual first read.
+- **Implementation diagrams often bury the user**: if the artifact explains a workflow, make user-facing objects dominant and push machinery into a quieter support layer.
+- **Dense SVGs collapse on mobile**: choose stacking, simplification, or horizontal scroll before shrinking labels until they are unreadable.
+- **Generic polish hides weak structure**: shadows, gradients, and rounded cards cannot fix a missing mental model, unclear action, or weak evidence path.
 
 ## Verification Before Completion
 
