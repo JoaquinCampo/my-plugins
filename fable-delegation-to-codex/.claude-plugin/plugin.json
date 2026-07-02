@@ -1,0 +1,12 @@
+{
+  "name": "fable-delegation-to-codex",
+  "version": "0.1.0",
+  "description": "Routes all delegable work (exploration, bulk reads, tests, mechanical edits, first-pass reviews, sweeps) from a Fable/Claude Code session to the Codex CLI via codex exec, spending Codex quota instead of Anthropic tokens. Fable orchestrates and judges; Codex executes.",
+  "author": {
+    "name": "Joaquin Campo",
+    "email": "jcamponario@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["codex", "delegation", "subagents", "orchestration", "tokens", "spark", "fable"],
+  "skills": "./skills/"
+}

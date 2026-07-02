@@ -135,6 +135,13 @@
       "description": "Agent skills for building agents with LangChain, LangGraph, and Deep Agents.",
       "version": "0.1.0",
       "keywords": ["langchain", "langgraph", "deep-agents", "agents"]
+    },
+    {
+      "name": "fable-delegation-to-codex",
+      "source": "./fable-delegation-to-codex",
+      "description": "Routes all delegable work (exploration, bulk reads, tests, mechanical edits, first-pass reviews, sweeps) from a Fable session to the Codex CLI via codex exec, spending Codex quota instead of Anthropic tokens.",
+      "version": "0.1.0",
+      "keywords": ["codex", "delegation", "subagents", "orchestration", "tokens", "spark", "fable"]
     }
   ]
 }
