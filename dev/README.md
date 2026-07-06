@@ -9,8 +9,9 @@ Daily-driver development skills, bundled into one install.
 | `codebase-design` | [mattpocock/skills](https://github.com/mattpocock/skills) `skills/engineering/codebase-design/` |
 | `improve-codebase-architecture` | [mattpocock/skills](https://github.com/mattpocock/skills) `skills/engineering/improve-codebase-architecture/` |
 | `grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) `skills/productivity/grilling/` (called by `improve-codebase-architecture`) |
+| `python-development` | General Python development skill, authored locally |
 
-All by Matt Pocock, copied verbatim at commit `6eeb81b`.
+The Matt Pocock skills are copied verbatim at commit `6eeb81b`.
 
 ## Pulls in (dependencies, not copied)
 

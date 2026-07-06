@@ -1,7 +1,7 @@
 {
   "name": "dev",
   "version": "0.1.0",
-  "description": "Daily-driver development skills: deep-module design and architecture-improvement scans, with review and tools doctrine.",
+  "description": "Daily-driver development skills: Python development, deep-module design, architecture-improvement scans, review, and tools doctrine.",
   "author": {
     "name": "Joaquin Campo",
     "email": "jcampo@pento.ai",
@@ -10,17 +10,18 @@
   "homepage": "https://github.com/JoaquinCampo/my-plugins",
   "repository": "https://github.com/JoaquinCampo/my-plugins",
   "license": "MIT",
-  "keywords": ["dev", "codebase-design", "architecture", "deep-modules", "daily-driver"],
+  "keywords": ["dev", "python", "python-development", "codebase-design", "architecture", "deep-modules", "daily-driver"],
   "skills": "./skills/",
   "interface": {
     "displayName": "Dev",
-    "shortDescription": "Codebase design, architecture, review, and tools guidance.",
-    "longDescription": "Daily-driver development bundle for codebase design, architecture improvement, module boundaries, pull request review tactics, and tools workflows.",
+    "shortDescription": "Python development, codebase design, architecture, review, and tools guidance.",
+    "longDescription": "Daily-driver development bundle for general Python development, codebase design, architecture improvement, module boundaries, pull request review tactics, and tools workflows.",
     "developerName": "Joaquin Campo",
     "category": "Development",
     "capabilities": ["Review", "Write"],
     "websiteURL": "https://github.com/JoaquinCampo/my-plugins",
     "defaultPrompt": [
+      "Use the Python development skill for this change.",
       "Review this module design.",
       "Improve this codebase architecture.",
       "Use subagents for this feature."
