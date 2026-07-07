@@ -20,9 +20,9 @@
     {
       "name": "humanizer",
       "source": "./humanizer",
-      "description": "Strips AI-tell patterns from text (em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, etc.) based on Wikipedia's 'Signs of AI writing' guide.",
-      "version": "2.5.1",
-      "keywords": ["writing", "editing", "ai-detection", "humanize", "prose"]
+      "description": "Strips AI-tell patterns from text (em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, etc.) based on Wikipedia's 'Signs of AI writing' guide. Includes humanizer-espanol, a Spanish variant with register calibration (academic, technical, rioplatense colloquial).",
+      "version": "2.6.0",
+      "keywords": ["writing", "editing", "ai-detection", "humanize", "prose", "spanish"]
     },
     {
       "name": "pr-review",
