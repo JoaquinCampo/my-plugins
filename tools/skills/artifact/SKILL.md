@@ -5,21 +5,21 @@ description: Use when building or improving HTML/CSS artifacts, React pages, das
 
 # Artifact
 
-Use this skill to turn visual output into a deliberately designed artifact, not a generic generated page. It applies to polished documents, dashboards, tools, landing pages, demos, games, and visual explanations.
+Approach this as the design lead at a small studio known for their versatility, giving every client a visual identity pitched at the treatment the task actually calls for. Make deliberate choices about palette, typography, and layout that are specific to this subject, and avoid templated designs.
 
-## First Classify The Treatment
+## Read the request first
 
-Pick the treatment before choosing style:
+Calibrate treatment, not whether to design. A doc deserves the same craft as a landing page — what changes is the treatment that craft is delivered in.
 
-- **Document**: memo, plan, report, narrative explainer. Prioritize typography, hierarchy, whitespace, and readable structure. Avoid giant heroes.
-- **Dashboard or tool**: scanned and operated repeatedly. Prioritize information density, state encoding, stable controls, and fast comparison.
-- **Landing or editorial page**: public-facing or shareable. Use a strong first impression, visual assets, and one memorable aesthetic decision.
-- **Component or app surface**: fit the existing product system first, then refine hierarchy, interaction states, and empty or loading states.
-- **Conceptual explainer**: use diagrams, SVG, canvas, code, or animation to make the idea inspectable.
+Many requests call for a more utilitarian treatment: a plan, a memo, a demo. Make it polished: include real typographic hierarchy, considered spacing, and a proper palette, but avoid over-designing. Most pages do not need a flashy, gigantic hero. Keep flourishes tasteful and limited.
 
-Completion criterion: the chosen treatment is explicit in the design plan and the output matches that treatment.
+Some requests call for an editorial treatment: a landing page, a game, an app or tool they'll keep or share.
 
-## Start With The User Mental Model
+When unsure: a well-composed page is never the wrong answer; an over-designed visual identity sometimes is.
+
+Fundamentals below apply to everything. The editorial process after that runs only when the read above says so.
+
+## Start with the viewer mental model
 
 Before layout or visuals, define what the viewer should understand at a glance:
 
@@ -29,42 +29,37 @@ Before layout or visuals, define what the viewer should understand at a glance:
 - **Evidence**: the reason, source, state, or tradeoff that makes the action trustworthy.
 - **Depth path**: what belongs in the first view versus what belongs lower on the page, in a detail panel, or behind interaction.
 
-Write the artifact from the viewer's side of the screen. Users do not care how the system works behind the scenes unless that mechanism changes trust, timing, risk, or accountability.
+Users do not care how the system works behind the scenes unless that mechanism changes trust, timing, risk, or accountability. For operational explainers, prefer this order: what needs attention, who owns it, why it matters, where to act, what happened after action.
 
-For operational explainers, prefer this order:
+The first viewport must communicate the artifact's core idea without requiring the reader to understand implementation internals.
 
-1. What needs attention.
-2. Who owns it.
-3. Why it matters.
-4. Where to act.
-5. What happened after action.
+## Fundamentals for every artifact
 
-Completion criterion: the first viewport communicates the artifact's core idea without requiring a reader to understand implementation internals.
+**Honor what's already there** Look for an existing design system first — CLAUDE.md, a tokens or theme file, existing component styles. When one exists, apply it; everything below fills gaps and never overrides. Precedence is always: the user's own words, then the project's existing system, then your choices.
 
-## Design Plan Before Code
+**Ground it in the subject.** If the subject isn't already clear, pin it: one concrete subject, its audience, and the page's single job. The subject's own world — its materials, instruments, vernacular — is where distinctive choices come from. Build with real content throughout, never lorem.
 
-Before writing UI code, produce a compact plan:
+**Pair typefaces** Typography carries the page even when the page isn't about typography. The Artifact CSP blocks font CDNs, so don't link a webfont URL and risk a silent fallback. Instead inline the face as a @font-face data URI. Keep running text near 65 characters wide; set a type scale and stay on it; give headings `text-wrap: balance`, body text room to breathe, and uppercase labels a touch of letter-spacing.
 
-- **Subject**: the concrete subject, audience, and single job of the artifact.
-- **Color**: 4 to 6 named hex values, including chosen neutrals and semantic state colors if needed.
-- **Type**: display, body, and utility or data roles. Use the existing product font stack when one exists.
-- **Layout**: one or two sentences explaining composition, density, and responsive behavior.
-- **Visual system**: the main visual device, for example SVG diagram, data cards, product imagery, map, timeline, canvas scene, or typographic treatment.
+**Choose neutrals, don't default to them.** A pure mid-grey reads as unconsidered; a grey with a slight hue bias toward the page's accent reads as chosen. Pure white and near-black are fine grounds when they suit the subject — the point is that the neutral was picked, not inherited.
 
-Then build from that plan. If a later design decision contradicts the plan, revise the plan first.
+**Design both themes.** The page renders in the viewer's theme: `prefers-color-scheme` carries the OS preference, and the viewer's toggle stamps `data-theme="dark"` / `data-theme="light"` on the root element, which must override the media query in both directions. The robust pattern is token-level: define the palette as custom properties on `:root`, redefine only the tokens under `@media (prefers-color-scheme: dark)` — style components through the tokens, never directly inside the media query — then redefine them again under `:root[data-theme="dark"]` and `:root[data-theme="light"]`. Give the second theme the same care as the first — don't naively invert; keep contrast legible and the accent working on both grounds. A design that deliberately commits to one visual world (a neon arcade screen, a letterpress invitation) may stay single-theme — make it a choice, not an omission.
 
-## Respect Existing Systems
+**Let layout do the spacing.** Lay out sibling groups with flex or grid and `gap`, not per-element margins that silently collapse or double. Wide content — tables, code, diagrams — gets `overflow-x: auto` on its own container so the page body never scrolls sideways. Reach for `font-variant-numeric: tabular-nums` wherever digits line up in columns.
 
-Precedence is:
+**Avoid AI-generated design** AI-generated design currently clusters around a few looks: warm cream (#F4F1EA) with a serif display and terracotta accent; near-black with a lone acid-green or vermilion pop; broadsheet hairline rules with dense columns; a purple-to-blue gradient hero on white; Inter or Space Grotesk as the "safe" face; emoji as section markers; everything centered; `rounded-lg` everywhere; accent bar/rail on rounded cards. Where the user pins down a visual direction, follow it exactly — their words always win, including when they ask for one of these looks. Where nothing is specified, don't spend that freedom on one of these defaults.
 
-1. User's explicit direction.
-2. Existing project design system, tokens, components, and framework conventions.
-3. This skill's guidance.
-4. New visual invention.
+**Build cleanly** Be cognizant of overlapping elements, cascade collisions, silent font fallbacks; visual bugs hide in the gap between source and output. Close every non-void element, double-quote attributes, give keyboard focus a visible state, respect `prefers-reduced-motion`. For generative or decorative graphics, reach for Canvas or WebGL rather than hand-authoring long SVG path data.
 
-When a project already has a UI system, reuse its tokens, components, icons, layout primitives, and state conventions. Add new visual language only where the existing system has no answer.
+**CSS rules** When writing the CSS, watch your selector specificities. It is easy to generate classes that cancel each other out — a type-based selector like `.section` fighting an element-based one like `.cta` over padding and margins between sections. Structure the cascade so it doesn't silently undo your spacing.
 
-## Use SVG When It Clarifies Complex Ideas
+**Writing the copy** Words are design material, not decoration. Write from the user's side of the screen — name things by what people recognize, not how the system is built (a person manages *notifications*, not *webhook config*). Active voice; a control says exactly what happens ("Publish", then a toast that says "Published"). Errors explain what went wrong and how to fix it — no apologies, no vagueness. Specific beats clever.
+
+**Structure is information** Structural devices, numbering, eyebrows, dividers, labels, should encode something true about the content, not decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence - like a real process or a typed timeline where order carries information the reader needs. Question if choices like numbered markers actually make sense before incorporating them.
+
+**When it's a UI, not a document** A dashboard or tool is scanned and operated, not read top-to-bottom, so the craft shifts from typography to information design. Surface the summary before the detail; encode state in form as well as number — a pill, a chip, a severity stripe — so what needs attention reads at a glance. Semantic color (good / warning / critical) is separate from the accent hue and doesn't count as your accent. Give sparklines and charts the same care as type: an area fill, a faint grid, an emphasized endpoint. What's interactive should look interactive.
+
+## Use SVG when it clarifies complex ideas
 
 SVG is the right tool when the artifact needs inspectable, precise, scalable meaning:
 
@@ -82,13 +77,11 @@ Build SVGs with meaningful structure:
 - Put repeated values in CSS variables or shared classes.
 - Make diagrams responsive with preserved aspect ratio and container constraints.
 
-Do not avoid SVG just because it is visual code. Use it when it is the clearest representation of the idea.
-
-Use Canvas or WebGL instead when the visual is high-volume, generative, particle-based, heavily animated, or performance-sensitive. Use HTML/CSS for ordinary layout and controls.
+Do not avoid SVG just because it is visual code. Use it when it is the clearest representation of the idea. Use Canvas or WebGL instead when the visual is high-volume, generative, particle-based, heavily animated, or performance-sensitive. Use HTML/CSS for ordinary layout and controls.
 
 Completion criterion: every SVG has a clear semantic reason to exist, no unreadable long path data unless unavoidable, and it remains legible at mobile and desktop widths.
 
-## Efficient SVG Iteration Loop
+## Efficient SVG iteration loop
 
 SVGs fail when they are only technically valid. Treat complex SVG as an interface, not decoration.
 
@@ -106,23 +99,30 @@ Prefer real text, grouped layers, reusable classes, and short connector paths. U
 
 Completion criterion: after desktop and mobile screenshots before completion, the SVG explains the idea at a glance, has no clipped text or collisions, and still preserves enough detail for inspection.
 
-## Avoid Generic AI Aesthetics
+## Process
 
-Avoid defaulting to:
+Before writing code, sketch a short design plan — a compact token system with color, type, and layout:
+- **Color**: describe the palette as 4–6 named hex values.
+- **Type**: typefaces for 2+ roles — a characterful display face used with restraint, a complementary body face, and a utility face for captions or data if needed.
+- **Layout**: a layout concept in one or two sentences.
 
-- Warm cream plus serif plus terracotta.
-- Purple or blue gradient hero on white.
-- Near-black plus one neon accent.
-- Everything centered.
-- Emoji as section markers.
-- `rounded-lg` everywhere.
-- Accent rails on rounded cards.
-- Inter, Space Grotesk, or system fonts as the automatic answer when no product system requires them.
-- Decorative numbered markers unless the content is genuinely sequential.
+Then build, following the plan and deriving every color and type decision from it.
 
-If the user explicitly asks for one of these, follow the user. Otherwise spend design freedom on subject-specific choices.
+## When the request is editorial
 
-## Frontend Rules For Codex
+The stance shifts: the client has already rejected proposals that felt templated, and is paying for a distinctive point of view. Make opinionated calls, and take one real aesthetic risk where it serves the work.
+
+Review the design plan against the subject before building: if any part of it reads like the generic default you would produce for any similar page, revise that part, and note what you changed and why. Only after you've confirmed the plan's uniqueness do you write the code, following the revised plan exactly.
+
+**Principles**
+
+- The hero is a thesis: open with the most characteristic thing in the subject's world — headline, image, live demo, interactive moment.
+- Typography carries the personality of the page. Pair the display and body faces deliberately, not the same families you would reach for on any other project, and set a clear type scale with intentional weights, widths, and spacing. Make the type treatment itself a memorable part of the design, not a neutral delivery vehicle for the content.
+- Leverage motion deliberately. Think about where and if animation can serve the subject: a page-load sequence, a scroll-triggered reveal, hover micro-interactions, ambient atmosphere. An orchestrated moment usually lands harder than scattered effects; choose what the direction calls for. However, sometimes less is more, and extra animation contributes to the feeling that the design is AI-generated.
+- Match complexity to the vision. Maximalist directions need elaborate execution; minimal directions need precision in spacing, type, and detail. Elegance is executing the chosen vision well.
+- Spend your boldness in one place; keep everything around it quiet. If the accent fights the ground, shift it toward analogous or drop saturation rather than replacing it.
+
+## Frontend rules for apps and tools
 
 - Build the actual usable experience as the first screen for apps, tools, and games. Do not create a marketing landing page unless requested.
 - Keep dashboards quiet, dense, and operational. Avoid oversized hero sections and decorative card grids.
@@ -130,19 +130,44 @@ If the user explicitly asks for one of these, follow the user. Otherwise spend d
 - Use icons for tool buttons when an icon is more recognizable than text.
 - Use stable dimensions for boards, controls, counters, tiles, charts, and SVG canvases so hover states and dynamic labels do not shift layout.
 - Do not scale font size with viewport width. Use fixed type scales and responsive layout instead.
-- Keep letter spacing at `0` except for small uppercase labels.
-- Avoid one-note palettes. Semantic state colors do not count as the accent.
 - Ensure text never overlaps adjacent content or escapes controls.
 
-## Copy Rules
+## Flagship artifacts: devices, not components
 
-Write from the user's side of the screen:
+When the artifact is a deliverable someone will study, share, or operate — an explainer, a system explorer, a study guide, a decision tool — build bespoke at the flagship tier. Reusable visual components cannot produce this tier — a shared kit is exactly what makes pages look generated.
 
-- Controls say what happens.
-- Errors explain what went wrong and what to do next.
-- Labels use domain language, not implementation language.
-- Specific beats clever.
-- Use real content. Never use lorem unless the user asks for placeholder copy.
+**Declare the tier before building.** State explicitly whether you're building *utilitarian* (quick internal page, kit allowed) or *flagship*, so the user can correct the calibration in one word. Requests to be studied or shared default to flagship; the keyword "flagship" always means it. The flagship contract: identity (palette, three type faces, micro-flourishes) derived from the subject's own world; 10–20 purpose-built devices; 2–4 interactive devices that each explain something (hundreds of lines of JS is normal, not excessive); honesty devices wherever the source material is messy; and a minimum of three render→critique→patch passes — never present a first render as done.
+
+Flagship workflow, in order:
+
+1. `references/grounding.md` — extract real data BEFORE design: verbatim quotes tagged REAL/PARAPHRASED/ILLUSTRATIVE, numbers computed by script, graph layouts generated with Graphviz rather than hand-placed.
+2. `references/devices.md` — the craft vocabulary: identity, structure, explanatory, interaction, and honesty devices, with the material→device selection table.
+3. `kit/behaviors/` — copy-paste interaction modules with no visual opinion (tooltip, pan/zoom, hover-dim ego networks, stepper with scroll autoplay, data-driven line chart). Inline them; style their class hooks with the page's own tokens.
+4. `references/iteration.md` — the render→critique→patch protocol, the 10-question quality rubric, the screenshot matrix (interaction states, 100% crops, mobile, console), and known cascade traps.
+
+## Component kit
+
+For quick utilitarian pages only — an internal dashboard, a memo, a status report where speed matters more than identity — reuse the kit in `kit/` instead of improvising parts. Never build a flagship artifact from kit parts, and never let the kit's neutral identity substitute for a subject-derived one.
+
+How to use it:
+
+1. Copy `kit/tokens.css` into the artifact and swap token *values* for the project's brand (palette, fonts); keep token *names*. Components read only tokens, so both themes keep working after a retheme.
+2. Read only the component files the page needs, and paste their markup and CSS. Each file states when to use it, when not to, and its known failure mode.
+3. `kit/gallery.html` renders every component in both themes — the source of truth is `kit/components/*.md`; if you change a component, update the gallery too, then screenshot it as the regression check.
+
+Components:
+
+- `kit/components/page-header.md` — quiet header: eyebrow, title, meta, actions. The anti-hero.
+- `kit/components/stat-tile.md` — KPI row: value, unit, semantic delta, stable height.
+- `kit/components/status-pill.md` — categorical state pills and row severity stripes.
+- `kit/components/data-table.md` — scannable rows: overflow wrapper, sticky header, numeric alignment, empty state.
+- `kit/components/callout.md` — info/ok/warn/crit blocks that must not be skimmed past.
+- `kit/components/timeline.md` — typed events in real order, mono timestamps.
+- `kit/components/definition-list.md` — key-value facts about one record.
+- `kit/components/sparkline.md` — inline trend SVG: line, area, endpoint dot, point-generation math.
+- `kit/components/svg-diagram.md` — diagram scaffold: lanes, nodes, edges, arrow marker, priority classes.
+
+For full charts, follow the `dataviz` skill; the kit's semantic tokens (`--ok`/`--warn`/`--crit`) and accent are the shared vocabulary between both.
 
 ## Gotchas
 
@@ -151,20 +176,25 @@ Write from the user's side of the screen:
 - **Dense SVGs collapse on mobile**: choose stacking, simplification, or horizontal scroll before shrinking labels until they are unreadable.
 - **Generic polish hides weak structure**: shadows, gradients, and rounded cards cannot fix a missing mental model, unclear action, or weak evidence path.
 
-## Verification Before Completion
+## Verification before completion
 
 For static HTML that can open directly, verify the file exists and inspect it in browser when feasible.
 
 For apps or components, run the dev server when feasible and verify with browser screenshots:
 
 - Desktop viewport.
-- Mobile viewport.
+- Mobile viewport (~375px), and confirm `document.body.scrollWidth === window.innerWidth`.
+- Both light and dark themes when the surface is theme-aware.
 - No body horizontal scroll.
 - No obvious text overlap or clipped controls.
 - SVGs and visual assets render nonblank and stay framed.
-- Interactive controls, hover states, or toggles work for the main flow.
+- **Every interactive state**, not just the initial render: each tab, each step, hover active, details open. Interaction states are where bugs hide.
+- **At least one 100% crop** of a dense region — full-page screenshots downscale detail bugs (clipped text, wrong tints, misaligned baselines) into invisibility.
+- **Browser console is clean** — zero errors.
 - Motion respects `prefers-reduced-motion` when motion is significant.
+
+For flagship-tier artifacts, verification is not one pass: follow the full protocol and quality rubric in `references/iteration.md`.
 
 If browser verification is unavailable, state that limitation and run the strongest available static checks, such as lint, build, typecheck, or targeted HTML/CSS inspection.
 
-Completion criterion: the artifact is implemented, visible, responsive, and checked against the treatment and visual plan.
+Completion criterion: the artifact is implemented, visible, responsive, checked in both themes where applicable, and matches the treatment and visual plan.
