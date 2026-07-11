@@ -7,8 +7,8 @@ situations. The machine-readable source is `sample_tasks.json`.
 
 - `plan-no-edit`: verifies that planning and review prompts do not trigger file
   edits.
-- `feature-cli`: checks CLI design, config validation, command discovery, and
-  stdout or stderr behavior.
+- `feature-cli`: checks Typer CLI design, config validation, uv command style,
+  and stdout or stderr behavior.
 - `bug-config-cause`: checks exception chaining, regression tests, and focused
   validation.
 - `review-risky-diff`: checks risk triage, premise review, migrations, and
@@ -19,18 +19,19 @@ situations. The machine-readable source is `sample_tasks.json`.
 - `async-cleanup`: checks async debugging, cancellation, timeouts, and cleanup.
 - `dependency-upgrade`: checks lockfile discipline, dependency boundaries, and
   release smoke validation.
-- `data-model-choice`: checks whether agents choose appropriate named data
-  shapes without overusing validation frameworks.
-- `observability-boundary`: checks logs, metrics, tracing, secret handling, and
-  external service adapter boundaries.
+- `data-model-choice`: checks whether agents choose simple named data shapes and
+  avoid fancy Pydantic model logic.
+- `observability-boundary`: checks logs, metrics, tracing, secret handling,
+  and external service adapter boundaries.
 - `docs-style-cleanup`: checks behavior-preserving cleanup of names, comments,
   and docstrings without formatter bikeshedding.
 
 ## Common failure modes
 
 - Editing files on no-edit prompts.
-- Using generic commands before discovering project commands.
-- Applying optional library guidance as a universal rule.
+- Using generic commands instead of the house `uv run` command set.
+- Treating conflicting local tooling as a silent exception instead of reporting a
+  mismatch.
 - Reporting tests as passed without running them.
 - Returning review findings without concrete fixes or validation.
 - Missing security implications for paths, archives, subprocesses, or secrets.

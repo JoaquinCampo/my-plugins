@@ -10,22 +10,23 @@ review-oriented baseline as source material.
 Reason: the baseline contained project-specific framing and review-only shape.
 A new skill avoids compatibility breakage and keeps the general artifact clean.
 
-## Discovery before defaults
+## Discover before applying the house stack
 
-Decision: make project discovery the first operating rule.
+Decision: make project discovery the first operating rule, then apply the house
+stack uniformly.
 
-Reason: Python projects differ in supported versions, package managers, test
-runners, linters, type checkers, source layouts, and CI commands. A general
-skill should adapt rather than impose one stack.
+Reason: Python projects differ in supported versions, source layouts, command
+wrappers, and CI jobs. Discovery prevents blind edits, but it should surface
+mismatches instead of silently replacing the house stack.
 
-## Defaults are conditional
+## House defaults are uniform
 
-Decision: describe uv, Ruff, pytest, mypy or pyright, Pydantic, Typer, Loguru,
-FastAPI, and scientific Python as defaults or optional ecosystem guidance, not
-universal requirements.
+Decision: use uv, Ruff, pytest, MyPy, Pydantic, pydantic-settings, Typer,
+Loguru, FastAPI, and scientific Python guidance as the house baseline.
 
-Reason: these are strong modern tools, but forcing them into existing projects
-would create project-specific behavior and unnecessary churn.
+Reason: the skill is meant to encode a consistent Python house style. When an
+existing project conflicts, the assistant should name the mismatch and ask
+whether to migrate or make a minimal compatibility change.
 
 ## References are modular
 
@@ -42,12 +43,13 @@ categories, severity, and clean-review output.
 Reason: duplicated schemas drift. `SKILL.md` keeps a summary, and the quality
 harness checks alignment.
 
-## Quality harness is stdlib-only
+## Quality harness runs through uv
 
-Decision: `quality/validate_skill.py` uses only the Python standard library.
+Decision: `quality/validate_skill.py` uses only the Python standard library, but
+maintenance commands run it with `uv run`.
 
-Reason: the skill lives as a user-level artifact, not a package with managed
-dependencies. Validation should be runnable on a normal Python install.
+Reason: the validator should stay dependency-light, while the command style
+still follows the house standard.
 
 ## Runnable fixtures are tiny and optional
 

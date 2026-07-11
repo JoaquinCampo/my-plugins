@@ -5,8 +5,10 @@ tests, and local runs. Keep it useful, low-noise, and safe.
 
 ## Logging
 
-- Use the project's logging library.
+- Use Loguru as the logging library.
 - Log at boundaries, retries, long-running operations, and unexpected failures.
+- For exception logs, use `logger.opt(exception=True).error(...)`, not
+  `logger.error(..., exc_info=True)`.
 - Include stable identifiers and context that help debug.
 - Do not log secrets or full sensitive payloads.
 - Avoid noisy per-item logs in hot loops unless sampled or debug-only.
@@ -27,6 +29,5 @@ over relying on log scraping alone. Diagnostic output should not expose secrets.
 
 ## Sources
 
-- Python logging docs: https://docs.python.org/3/library/logging.html
-- Loguru docs: https://loguru.readthedocs.io/
-- OpenTelemetry Python docs: https://opentelemetry.io/docs/languages/python/
+- Loguru docs: <https://loguru.readthedocs.io/>
+- OpenTelemetry Python docs: <https://opentelemetry.io/docs/languages/python/>

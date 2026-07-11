@@ -9,9 +9,9 @@ Inspect workflow files and scripts for:
 
 - supported Python versions
 - OS matrix
-- install command
+- uv install or sync command
 - cache behavior
-- lint, type, and test commands
+- Ruff, MyPy, and pytest commands
 - coverage thresholds
 - integration service setup
 - release or publish jobs
@@ -23,9 +23,9 @@ local equivalent when present.
 
 For packaging, CLI entry points, public APIs, or dependency changes, consider:
 
-- build succeeds
+- `uv build` succeeds
 - package imports after installation
-- CLI scripts execute
+- Typer CLI scripts execute
 - package data is included
 - version metadata is correct
 - optional extras or dependency groups still resolve
@@ -37,6 +37,6 @@ coverage and what remains unverified.
 
 ## Sources
 
-- Python Packaging User Guide: https://packaging.python.org/
-- pytest good practices: https://docs.pytest.org/en/stable/explanation/goodpractices.html
-- uv build docs: https://docs.astral.sh/uv/guides/package/
+- Python Packaging User Guide: <https://packaging.python.org/>
+- pytest good practices: <https://docs.pytest.org/en/stable/explanation/goodpractices.html>
+- uv build docs: <https://docs.astral.sh/uv/guides/package/>

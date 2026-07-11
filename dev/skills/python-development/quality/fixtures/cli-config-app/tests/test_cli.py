@@ -1,30 +1,46 @@
 """Tests for the CLI fixture."""
 
-import json
 from pathlib import Path
 
-from demo_cli_app.cli import run
+from typer.testing import CliRunner  # type: ignore[import-not-found]
+
+from demo_cli_app.cli import app  # type: ignore[import-not-found]
+
+runner = CliRunner()
 
 
-def test_cli_prints_normalized_json(tmp_path: Path, capsys) -> None:
+def test_cli_prints_normalized_json(tmp_path: Path) -> None:
     """The CLI writes machine-readable output to stdout."""
     config_path = tmp_path / "config.json"
     config_path.write_text('{"Name": "Ada"}', encoding="utf-8")
 
-    assert run([str(config_path), "--env-prefix", "APP"]) == 0
+    result = runner.invoke(app, [str(config_path), "--env-prefix", "APP"])
 
-    captured = capsys.readouterr()
-    assert json.loads(captured.out) == {"env_prefix": "APP", "name": "Ada"}
-    assert captured.err == ""
+    assert result.exit_code == 0
+    assert result.stdout == '{"env_prefix": "APP", "name": "Ada"}\n'
+    assert result.stderr == ""
 
 
-def test_cli_reports_config_errors_on_stderr(tmp_path: Path, capsys) -> None:
+def test_cli_reads_environment_settings(tmp_path: Path, monkeypatch) -> None:
+    """Environment-backed settings are loaded through pydantic-settings."""
+    config_path = tmp_path / "config.json"
+    config_path.write_text('{"Name": "Ada"}', encoding="utf-8")
+    monkeypatch.setenv("DEMO_ENV_PREFIX", "ENV")
+
+    result = runner.invoke(app, [str(config_path)])
+
+    assert result.exit_code == 0
+    assert result.stdout == '{"env_prefix": "ENV", "name": "Ada"}\n'
+    assert result.stderr == ""
+
+
+def test_cli_reports_config_errors_on_stderr(tmp_path: Path) -> None:
     """Malformed JSON returns a nonzero exit and stderr diagnostic."""
     config_path = tmp_path / "config.json"
     config_path.write_text("not json", encoding="utf-8")
 
-    assert run([str(config_path)]) == 2
+    result = runner.invoke(app, [str(config_path)])
 
-    captured = capsys.readouterr()
-    assert captured.out == ""
-    assert "invalid JSON config" in captured.err
+    assert result.exit_code == 2
+    assert result.stdout == ""
+    assert "invalid JSON config" in result.stderr

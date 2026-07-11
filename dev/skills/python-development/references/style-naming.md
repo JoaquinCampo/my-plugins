@@ -4,6 +4,18 @@ Style should make code easier to read and maintain. Prefer tool-enforced style
 where possible, and spend human attention on names and structure that tools
 cannot judge.
 
+## House style
+
+Optimize for clarity, safety, and usefulness.
+
+- Prefer beautiful, explicit, simple, flat, sparse, readable code.
+- Choose one obvious path and explain the rationale in one to three bullets when
+  it helps the reader.
+- Apply rules uniformly. Do not invent ad hoc exceptions.
+- Surface uncertainty and failure modes with clear, actionable messages.
+- Ask a crisp clarifying question when ambiguity would change the safe answer.
+- If a method is hard to explain briefly, propose a simpler plan.
+
 ## Names
 
 - Use names that reveal intent.
@@ -21,5 +33,5 @@ reader's path through the code.
 
 ## Sources
 
-- PEP 8: https://peps.python.org/pep-0008/
-- Google Python style guide: https://google.github.io/styleguide/pyguide.html
+- PEP 8: <https://peps.python.org/pep-0008/>
+- Google Python style guide: <https://google.github.io/styleguide/pyguide.html>

@@ -23,7 +23,9 @@ def test_extracts_safe_member(tmp_path: Path) -> None:
 
     extracted = extract_zip(archive_path, output_dir)
 
-    assert [path.relative_to(output_dir) for path in extracted] == [Path("nested/file.txt")]
+    assert [path.relative_to(output_dir) for path in extracted] == [
+        Path("nested/file.txt")
+    ]
     assert (output_dir / "nested" / "file.txt").read_text(encoding="utf-8") == "hello"
 
 

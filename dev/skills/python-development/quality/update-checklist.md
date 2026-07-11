@@ -9,7 +9,7 @@ Use this checklist when changing the skill.
 - Add it to the `SKILL.md` reference catalogue if agents should discover it
   directly.
 - Include a `## Sources` section.
-- Run `python3 quality/validate_skill.py`.
+- Run `uv run quality/validate_skill.py`.
 
 ## Schema change
 
@@ -33,8 +33,9 @@ Use this checklist when changing the skill.
 - Check `quality/source-audit.md` for the current source map and refresh links
   when needed.
 - Add version gates for Python-version-specific advice.
-- Mark optional ecosystem guidance as optional.
-- Ask a reviewer to check for stale or over-strong claims.
+- Keep house stack guidance uniform: uv, Ruff, MyPy, pytest, Pydantic,
+  pydantic-settings, Typer, and Loguru.
+- Ask a reviewer to check for stale or under-specified claims.
 
 ## Major behavior change
 

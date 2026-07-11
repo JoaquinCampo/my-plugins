@@ -2,9 +2,11 @@
 name = "demo-cli-config-app"
 version = "0.1.0"
 requires-python = ">=3.11"
+dependencies = ["pydantic-settings>=2", "pydantic>=2", "typer>=0.12"]
 
 [project.scripts]
-demo-config = "demo_cli_app.cli:main"
+demo-config = "demo_cli_app.cli:cli"
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]

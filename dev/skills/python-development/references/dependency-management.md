@@ -9,7 +9,7 @@ Check:
 
 - whether the standard library already solves the problem well enough
 - whether an existing dependency in the project already solves it
-- existing package manager and lockfile
+- `uv` configuration, `uv.lock`, and any legacy lockfile mismatch
 - supported Python versions
 - runtime versus development dependency group
 - optional extra versus required dependency
@@ -21,16 +21,16 @@ dependency for a small helper that is simple, stable, and local.
 
 ## Lockfiles
 
-Respect the repository's lockfile policy. If a dependency change is in scope,
-update the lockfile with the project's tool. If the lockfile is not updated,
-state why.
+Use `uv` for lockfile changes. If a dependency change is in scope, update
+`uv.lock` with `uv lock` or the relevant `uv add` or `uv remove` command. If the
+lockfile is not updated, state why.
 
 ## Dependency groups and extras
 
 - Runtime requirements belong in standard project dependencies.
 - Optional user-facing feature sets usually belong in optional dependencies or
   extras.
-- Local development tools can use standardized dependency groups when the
+- Local development tools should use dependency groups managed by uv when the
   project supports them.
 
 ## Upgrade workflow
@@ -41,6 +41,6 @@ and run broader validation before declaring success.
 
 ## Sources
 
-- Python Packaging User Guide: https://packaging.python.org/
-- Dependency groups specification: https://packaging.python.org/en/latest/specifications/dependency-groups/
-- uv dependency docs: https://docs.astral.sh/uv/concepts/projects/dependencies/
+- Python Packaging User Guide: <https://packaging.python.org/>
+- Dependency groups specification: <https://packaging.python.org/en/latest/specifications/dependency-groups/>
+- uv dependency docs: <https://docs.astral.sh/uv/concepts/projects/dependencies/>

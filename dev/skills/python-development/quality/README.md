@@ -8,16 +8,17 @@ a one-off document.
 Run from the skill root:
 
 ```bash
-python3 quality/validate_skill.py
+uv run quality/validate_skill.py
 ```
 
 Or run from this `quality/` directory:
 
 ```bash
-python3 validate_skill.py
+uv run validate_skill.py
 ```
 
-The validator uses only the Python standard library. It checks:
+The validator uses only the Python standard library, but run it through `uv run`
+so the command style matches this skill. It checks:
 
 - required files and directories
 - skill front matter
@@ -35,8 +36,8 @@ The validator uses only the Python standard library. It checks:
 Two fixtures include tiny runnable test suites:
 
 ```bash
-cd quality/fixtures/cli-config-app && PYTHONPATH=src uv run --with pytest pytest -q
-cd ../file-processing-app && PYTHONPATH=src uv run --with pytest pytest -q
+cd quality/fixtures/cli-config-app && uv run --with pytest pytest -q
+cd ../file-processing-app && uv run --with pytest pytest -q
 ```
 
 Remove generated `.venv`, `uv.lock`, `.pytest_cache`, and `__pycache__` files

@@ -1,7 +1,7 @@
 # Development loop
 
 Use this loop for implementation work. It keeps changes small, testable, and
-aligned with the repository instead of with generic preferences.
+aligned with the house stack and the repository's behavior contract.
 
 ## 1. Orient
 
@@ -10,7 +10,7 @@ Before coding, identify:
 - the caller or user-visible behavior
 - nearby implementation patterns
 - existing tests
-- relevant config and validation commands
+- relevant config, house-tool settings, and validation commands
 - dependencies and side effects
 - likely failure modes
 
@@ -75,6 +75,6 @@ A completion summary should include:
 
 ## Sources
 
-- pytest good practices: https://docs.pytest.org/en/stable/explanation/goodpractices.html
-- Python Packaging User Guide: https://packaging.python.org/
-- Ruff docs: https://docs.astral.sh/ruff/
+- pytest good practices: <https://docs.pytest.org/en/stable/explanation/goodpractices.html>
+- Python Packaging User Guide: <https://packaging.python.org/>
+- Ruff docs: <https://docs.astral.sh/ruff/>

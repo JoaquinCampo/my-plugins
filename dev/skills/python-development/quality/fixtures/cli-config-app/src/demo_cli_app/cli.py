@@ -1,54 +1,71 @@
-"""Small argparse CLI with config precedence for skill evaluation."""
+"""Small Typer CLI with config precedence for skill evaluation."""
 
-import argparse
 import json
-import os
-import sys
 from pathlib import Path
-from typing import Any
+
+import typer  # type: ignore[import-not-found]
+from pydantic import TypeAdapter, ValidationError
+from pydantic_settings import (  # type: ignore[import-not-found]
+    BaseSettings,
+    SettingsConfigDict,
+)
+
+JsonConfig = dict[str, object]
+CONFIG_ADAPTER = TypeAdapter(JsonConfig)
+
+app = typer.Typer(add_completion=False, no_args_is_help=True)
 
 
-def load_config(path: Path) -> dict[str, Any]:
+class CliSettings(BaseSettings):
+    """Environment-backed CLI settings."""
+
+    model_config = SettingsConfigDict(env_prefix="DEMO_")
+
+    env_prefix: str | None = None
+
+
+def load_config(path: Path) -> JsonConfig:
     """Load a JSON object from a config path."""
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         raise ValueError(f"invalid JSON config: {path}") from exc
-    if not isinstance(data, dict):
-        raise ValueError("config must be a JSON object")
-    return data
+
+    try:
+        return CONFIG_ADAPTER.validate_python(data)
+    except ValidationError as exc:
+        raise ValueError("config must be a JSON object") from exc
 
 
-def normalize_config(config: dict[str, Any], *, env_prefix: str | None = None) -> dict[str, Any]:
+def normalize_config(
+    config: JsonConfig, *, env_prefix: str | None = None
+) -> JsonConfig:
     """Return a normalized config with optional environment prefix override."""
-    normalized = {str(key).lower(): value for key, value in config.items()}
+    normalized: JsonConfig = {str(key).lower(): value for key, value in config.items()}
     if env_prefix is not None:
         normalized["env_prefix"] = env_prefix
     return normalized
 
 
-def build_parser() -> argparse.ArgumentParser:
-    """Build the command parser."""
-    parser = argparse.ArgumentParser(prog="demo-config")
-    parser.add_argument("config", type=Path)
-    parser.add_argument("--env-prefix", default=os.getenv("DEMO_ENV_PREFIX"))
-    return parser
-
-
-def run(argv: list[str]) -> int:
-    """Run the CLI and return a process exit code."""
-    parser = build_parser()
-    args = parser.parse_args(argv)
+@app.command()
+def main(
+    config: Path,
+    env_prefix: str | None = typer.Option(None, "--env-prefix"),
+) -> None:
+    """Print normalized JSON for a config file."""
+    settings = CliSettings()
+    resolved_env_prefix = env_prefix if env_prefix is not None else settings.env_prefix
     try:
-        config = load_config(args.config)
-        normalized = normalize_config(config, env_prefix=args.env_prefix)
+        normalized = normalize_config(
+            load_config(config), env_prefix=resolved_env_prefix
+        )
     except ValueError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 2
-    print(json.dumps(normalized, sort_keys=True))
-    return 0
+        typer.echo(f"error: {exc}", err=True)
+        raise typer.Exit(2) from exc
+
+    typer.echo(json.dumps(normalized, sort_keys=True))
 
 
-def main() -> None:
+def cli() -> None:
     """CLI entry point."""
-    raise SystemExit(run(sys.argv[1:]))
+    app()

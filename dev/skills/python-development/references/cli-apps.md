@@ -15,14 +15,11 @@ validated, and easy to test.
 
 ## Framework choice
 
-Use the framework already present. For new CLIs:
+Use Typer for CLI applications. Typer keeps command signatures close to typed
+Python functions and supports clear command tests.
 
-- `argparse` is a solid standard-library default.
-- Typer is useful for type-hint-driven CLIs when adding a dependency is
-  acceptable.
-
-Do not force Typer onto a project that already has a simple argparse CLI unless
-the task is a CLI migration.
+Keep command functions thin. Delegate business logic to functions that do not
+depend on Typer objects so tests can cover behavior directly.
 
 ## Testing
 
@@ -39,6 +36,6 @@ Check:
 
 ## Sources
 
-- argparse docs: https://docs.python.org/3/library/argparse.html
-- Typer docs: https://typer.tiangolo.com/
-- pytest output capture: https://docs.pytest.org/en/stable/how-to/capture-stdout-stderr.html
+- Typer docs: <https://typer.tiangolo.com/>
+- Typer testing docs: <https://typer.tiangolo.com/tutorial/testing/>
+- pytest output capture: <https://docs.pytest.org/en/stable/how-to/capture-stdout-stderr.html>

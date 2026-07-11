@@ -7,62 +7,62 @@ a substitute for checking the docs again when making strong future claims.
 
 - Python 3.14 What's New, annotation semantics, multiprocessing defaults,
   asyncio changes, debugger updates:
-  https://docs.python.org/3.14/whatsnew/3.14.html
+  <https://docs.python.org/3.14/whatsnew/3.14.html>
 - Python typing docs:
-  https://docs.python.org/3/library/typing.html
+  <https://docs.python.org/3/library/typing.html>
 - `annotationlib` docs:
-  https://docs.python.org/3/library/annotationlib.html
-- `pathlib`, `subprocess`, `tarfile`, `argparse`, `logging`, `asyncio`,
-  `multiprocessing`, and `concurrent.futures` docs under:
-  https://docs.python.org/3/library/
+  <https://docs.python.org/3/library/annotationlib.html>
+- `pathlib`, `subprocess`, `tarfile`, `asyncio`, `multiprocessing`, and
+  `concurrent.futures` docs under:
+  <https://docs.python.org/3/library/>
 
 ## Packaging and environments
 
 - Python Packaging User Guide:
-  https://packaging.python.org/
+  <https://packaging.python.org/>
 - pyproject guide:
-  https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+  <https://packaging.python.org/en/latest/guides/writing-pyproject-toml/>
 - Dependency groups specification:
-  https://packaging.python.org/en/latest/specifications/dependency-groups/
+  <https://packaging.python.org/en/latest/specifications/dependency-groups/>
 - uv docs:
-  https://docs.astral.sh/uv/
+  <https://docs.astral.sh/uv/>
 
 ## Tooling
 
 - Ruff docs:
-  https://docs.astral.sh/ruff/
+  <https://docs.astral.sh/ruff/>
 - Ruff fixes:
-  https://docs.astral.sh/ruff/linter/#fixes
+  <https://docs.astral.sh/ruff/linter/#fixes>
 - Ruff preview:
-  https://docs.astral.sh/ruff/preview/
+  <https://docs.astral.sh/ruff/preview/>
 - pytest docs:
-  https://docs.pytest.org/
-- mypy docs:
-  https://mypy.readthedocs.io/
-- pyright docs:
-  https://microsoft.github.io/pyright/
+  <https://docs.pytest.org/>
+- MyPy docs:
+  <https://mypy.readthedocs.io/>
 
-## Optional ecosystem
+## House ecosystem
 
 - Pydantic docs:
-  https://docs.pydantic.dev/latest/
+  <https://docs.pydantic.dev/latest/>
+- Pydantic settings docs:
+  <https://docs.pydantic.dev/latest/concepts/pydantic_settings/>
 - Typer docs:
-  https://typer.tiangolo.com/
+  <https://typer.tiangolo.com/>
 - Loguru docs:
-  https://loguru.readthedocs.io/
+  <https://loguru.readthedocs.io/>
 - FastAPI docs:
-  https://fastapi.tiangolo.com/
+  <https://fastapi.tiangolo.com/>
 - OpenTelemetry Python docs:
-  https://opentelemetry.io/docs/languages/python/
+  <https://opentelemetry.io/docs/languages/python/>
 
 ## Scientific Python
 
 - NumPy docs:
-  https://numpy.org/doc/stable/
+  <https://numpy.org/doc/stable/>
 - pandas docs:
-  https://pandas.pydata.org/docs/
+  <https://pandas.pydata.org/docs/>
 - PyTorch docs:
-  https://pytorch.org/docs/stable/
+  <https://pytorch.org/docs/stable/>
 
 ## Review cadence
 

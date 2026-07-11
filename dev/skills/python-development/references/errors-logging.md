@@ -34,15 +34,18 @@ that encodes success and failure explicitly.
 
 ## Logging
 
-- Prefer the logging library already used by the repo.
+- Use Loguru for logging.
 - Log at boundaries, retries, unexpected exceptions, and long-running operations.
+- For exception logs, use `logger.opt(exception=True).error(...)`.
+- Never use `logger.error(..., exc_info=True)`; that is stdlib logging style, not
+  Loguru style.
 - Include useful context, not secrets.
 - Avoid `print` in library code.
 - In hot paths, avoid eager formatting for disabled log levels.
 
 ## Sources
 
-- Python tutorial on exceptions: https://docs.python.org/3/tutorial/errors.html
-- Python exceptions docs: https://docs.python.org/3/library/exceptions.html
-- Google Python style guide, exceptions: https://google.github.io/styleguide/pyguide.html#24-exceptions
-- Loguru docs: https://loguru.readthedocs.io/
+- Python tutorial on exceptions: <https://docs.python.org/3/tutorial/errors.html>
+- Python exceptions docs: <https://docs.python.org/3/library/exceptions.html>
+- Google Python style guide, exceptions: <https://google.github.io/styleguide/pyguide.html#24-exceptions>
+- Loguru docs: <https://loguru.readthedocs.io/>

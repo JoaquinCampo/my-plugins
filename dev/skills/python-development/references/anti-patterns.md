@@ -9,7 +9,8 @@ risk and the smallest useful fix.
 - Editing files when the user asked only for advice, planning, explanation, or
   review.
 - Running broad formatters before understanding the diff.
-- Inventing commands instead of discovering project commands.
+- Inventing commands instead of using the house `uv run` command set or
+  documented wrappers around it.
 - Claiming tests or validation without running them.
 - Fixing nearby unrelated problems in the same change.
 
@@ -40,7 +41,7 @@ risk and the smallest useful fix.
 
 ## Sources
 
-- Google Python style guide: https://google.github.io/styleguide/pyguide.html
-- pytest good practices: https://docs.pytest.org/en/stable/explanation/goodpractices.html
-- Python subprocess security considerations: https://docs.python.org/3/library/subprocess.html#security-considerations
-- OWASP Top Ten: https://owasp.org/www-project-top-ten/
+- Google Python style guide: <https://google.github.io/styleguide/pyguide.html>
+- pytest good practices: <https://docs.pytest.org/en/stable/explanation/goodpractices.html>
+- Python subprocess security considerations: <https://docs.python.org/3/library/subprocess.html#security-considerations>
+- OWASP Top Ten: <https://owasp.org/www-project-top-ten/>

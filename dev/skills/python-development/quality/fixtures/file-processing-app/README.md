@@ -5,7 +5,7 @@ A tiny zip extraction app for evaluating IO and security behavior.
 Run, from this directory:
 
 ```bash
-PYTHONPATH=src uv run --with pytest pytest -q
+uv run --with pytest pytest -q
 ```
 
 Expected focus:

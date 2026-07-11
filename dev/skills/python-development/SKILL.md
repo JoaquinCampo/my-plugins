@@ -1,6 +1,6 @@
 ---
 name: python-development
-description: "General Python development skill for designing, implementing, refactoring, debugging, testing, validating, and reviewing Python code. Use for Python 3.11+ projects, especially modern pyproject-based repos using uv, Ruff, pytest, mypy or pyright, Pydantic v2, Typer, or Loguru. Adapt to the target repository before applying defaults."
+description: "General Python development skill for designing, implementing, refactoring, debugging, testing, validating, and reviewing Python code. Use for Python 3.11+ projects, especially modern pyproject-based repos using uv, Ruff, pytest, mypy, Pydantic v2, pydantic-settings, Typer, and Loguru. Applies the house Python stack uniformly while discovering local contracts."
 ---
 
 # Python Development
@@ -10,9 +10,10 @@ than a review rubric: it guides how to understand a repository, design the
 smallest useful API, write the code, test the behavior, validate the change, and
 review the result.
 
-The skill is opinionated but not blind. First discover the target project's
-Python version, tools, commands, and local conventions. Then apply the defaults
-below only where they fit.
+The skill is intentionally opinionated. First discover the target project's
+Python version, layout, behavior, and constraints. Then apply the house defaults
+below uniformly. If local configuration conflicts, surface the mismatch and ask
+before turning a bounded task into a tooling migration.
 
 ## When to use this skill
 
@@ -51,44 +52,53 @@ Follow these in order:
 
 1. The user's explicit request.
 2. Local agent or repository instructions.
-3. Project configuration, such as `pyproject.toml`, `setup.cfg`, `tox.ini`,
-   `noxfile.py`, `pytest.ini`, `.pre-commit-config.yaml`, CI workflows, and lock
-   files.
+3. Project configuration, such as `pyproject.toml`, `setup.cfg`, `pytest.ini`,
+   Ruff config, MyPy config, CI workflows, and lock files.
 4. Existing code and tests.
 5. This skill and its references.
 6. General ecosystem practice.
 
-If project configuration conflicts with this skill, follow the project and note
-the tradeoff only when it matters.
+If project configuration conflicts with this skill, do not silently adapt. Treat
+it as a mismatch, state the impact, and ask whether to migrate or make a minimal
+compatibility change.
 
 ## Modern Python defaults
 
-Use these as defaults when the project does not say otherwise:
+Use these as the house defaults. Apply them uniformly, and treat conflicting
+project configuration as a mismatch to surface rather than a reason to invent an
+exception:
 
 - Python: target the version declared by the project. For new code, prefer
   Python 3.12+ when the project allows it.
 - Packaging and metadata: prefer `pyproject.toml` as the central configuration
   file.
-- Environment and package manager: prefer `uv` for new projects or projects
-  already using it. Otherwise follow the existing tool, such as pip, pip-tools,
-  Poetry, Hatch, PDM, tox, or nox.
-- Formatting and linting: prefer Ruff formatter plus Ruff linting when the
-  project has not standardized elsewhere.
-- Type checking: prefer strict or gradually strict mypy or pyright. Follow the
-  checker already configured in the repo.
-- Testing: prefer pytest for new test suites unless the project uses unittest or
-  another runner.
+- Environment and package manager: use `uv`. Run Python tools through `uv run`.
+- Formatting and linting: use Ruff. Format with `uv run ruff format`; lint with
+  `uv run ruff check`.
+- Type checking: use MyPy. Check types with `uv run mypy`.
+- Testing: use pytest. Run tests with `uv run pytest`.
+- Data modeling and validation: use Pydantic v2 at boundaries and for named
+  application data that benefits from validation or serialization. Keep models
+  flat and validators simple.
+- Configuration: use `pydantic-settings` for environment-backed settings and
+  configuration objects.
+- CLI applications: use Typer.
+- Logging: use Loguru. For exception logs, use
+  `logger.opt(exception=True).error(...)`, never
+  `logger.error(..., exc_info=True)`.
 - Validation: run focused checks first, then broader checks before declaring a
   substantial change complete.
 
-Never hardcode commands from this skill if the repository defines its own.
-Discover and use the repo's actual commands.
+Do not invent alternate toolchains. If a repo defines wrappers around these
+commands, inspect them, but report validation in terms of the house tools and
+note any mismatch.
 
 ## Development loop
 
 ### 1. Orient
 
-- Find the package layout, source roots, tests, and configured tools.
+- Find the package layout, source roots, tests, and configured house-tool
+  settings.
 - Read the nearest existing code before inventing new patterns.
 - Read tests around the behavior before changing behavior.
 - For large or unfamiliar areas, build a short map: inputs, outputs, side
@@ -125,7 +135,10 @@ method was called.
 - Prefer guard clauses over deep nesting.
 - Prefer explicit errors over `None`, `-1`, empty strings, or silent fallbacks as
   failure signals.
-- Use plain data structures until a named model improves clarity or validation.
+- Use Pydantic models for boundary data, serialized payloads, settings, and
+  named application records that benefit from validation or serialization. Keep
+  models flat and validators simple.
+- Use plain data structures only for local, obvious, short-lived data.
 - Prefer the standard library or an existing dependency over custom code when it
   cleanly solves the problem.
 - Add abstractions only when there are real current call sites or invariants.
@@ -150,7 +163,7 @@ Before completion, review the diff for:
 - unnecessary abstraction
 - IO and resource safety
 - performance and concurrency hazards in hot paths
-- consistency with project conventions
+- consistency with the house stack and project contract
 
 ## Mode playbooks
 
@@ -257,7 +270,8 @@ Rules:
 - Ambiguous options and flags are keyword-only.
 - Return types match consumption: reusable collection versus one-shot iterator.
 - `None` is not overloaded when it is a valid input or output.
-- Data crossing boundaries has a named shape when that improves clarity.
+- Data crossing boundaries uses a clear named shape, preferably a simple
+  Pydantic model when runtime validation or serialization matters.
 - Public APIs avoid speculative parameters.
 
 ### Typing
@@ -273,15 +287,16 @@ Rules:
 - Exceptions are specific and preserve useful causes.
 - Runtime validation uses explicit raises, not `assert`.
 - Failure modes do not pass silently.
-- Logs add diagnostic context without noise.
+- Logs use Loguru and add diagnostic context without noise.
+- Exception logs use `logger.opt(exception=True).error(...)`, not
+  `logger.error(..., exc_info=True)`.
 - Hot paths avoid expensive disabled log formatting.
 
 ### Imports and packaging
 
 - Imports are absolute inside packages. Do not add relative imports.
 - Runtime imports are not hidden under `TYPE_CHECKING`.
-- Packaging changes are validated with the project's configured build or import
-  smoke checks.
+- Packaging changes are validated with `uv build` or import smoke checks.
 
 ### IO and resources
 
@@ -324,8 +339,7 @@ harness before declaring the edit complete.
 
 - `references/project-discovery.md`: how to detect Python version, tools,
   commands, package layout, and local conventions.
-- `references/tooling.md`: formatters, linters, type checkers, pre-commit, and
-  CI.
+- `references/tooling.md`: Ruff, MyPy, validation commands, wrappers, and CI.
 - `references/development-loop.md`: detailed workflow for writing code.
 - `references/validation.md`: choosing checks by work mode and risk.
 - `references/api-design.md`: functions, parameters, return values, and public
@@ -370,7 +384,7 @@ harness before declaring the edit complete.
   extraction.
 - `references/maintenance.md`: consistency checks when editing this skill.
 - `references/scientific-python.md`: optional NumPy, pandas, and torch guidance.
-- `references/libraries.md`: optional Pydantic, Typer, Loguru, FastAPI, and
-  other ecosystem notes.
+- `references/libraries.md`: uv, Ruff, MyPy, pytest, Pydantic,
+  pydantic-settings, Typer, Loguru, FastAPI, and ecosystem notes.
 
 Examples live in `examples/` and show review findings and validation summaries.

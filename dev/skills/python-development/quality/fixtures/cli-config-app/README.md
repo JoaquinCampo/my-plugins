@@ -1,11 +1,11 @@
 # cli-config-app fixture
 
-A tiny argparse app for evaluating CLI, configuration, and validation behavior.
+A tiny Typer app for evaluating CLI, configuration, and validation behavior.
 
 Run, from this directory:
 
 ```bash
-PYTHONPATH=src uv run --with pytest pytest -q
+uv run --with pytest pytest -q
 ```
 
 Expected focus:

@@ -97,7 +97,9 @@ def main() -> int:
         try:
             failures.extend(check())
         except FileNotFoundError as exc:
-            failures.append(f"missing file required by validation check: {exc.filename}")
+            failures.append(
+                f"missing file required by validation check: {exc.filename}"
+            )
 
     if failures:
         print("python-development skill validation failed:")
@@ -169,7 +171,9 @@ def check_reference_index() -> list[str]:
 
     for name in reference_files:
         if f"`{name}`" not in readme:
-            failures.append(f"reference file not indexed in references/README.md: {name}")
+            failures.append(
+                f"reference file not indexed in references/README.md: {name}"
+            )
 
     for name in re.findall(r"`([^`]+\.md)`", readme):
         if name == "SKILL.md":
@@ -210,7 +214,9 @@ def check_forbidden_content() -> list[str]:
         text = path.read_text(encoding="utf-8")
         for term in FORBIDDEN_TERMS:
             if term.lower() in text.lower():
-                failures.append(f"forbidden project-specific term in {relative(path)}: {term}")
+                failures.append(
+                    f"forbidden project-specific term in {relative(path)}: {term}"
+                )
         for name, char in FORBIDDEN_CHARS.items():
             if char in text:
                 failures.append(f"forbidden punctuation in {relative(path)}: {name}")
@@ -230,7 +236,9 @@ def check_review_examples() -> list[str]:
 
     findings = collect_findings(data)
     if not findings:
-        failures.append("review-findings.json must include at least one finding example")
+        failures.append(
+            "review-findings.json must include at least one finding example"
+        )
     for index, finding in enumerate(findings):
         missing = REQUIRED_SCHEMA_FIELDS - finding.keys()
         if missing:
@@ -286,12 +294,18 @@ def check_sample_tasks() -> list[str]:
             failures.append(f"duplicate sample task id: {task_id}")
         ids.add(task_id)
         if task_id and f"`{task_id}`" not in documented_tasks:
-            failures.append(f"sample task {task_id} is not documented in sample-tasks.md")
+            failures.append(
+                f"sample task {task_id} is not documented in sample-tasks.md"
+            )
         if task.get("mode") not in MODES:
-            failures.append(f"sample task {task_id} has invalid mode: {task.get('mode')}")
+            failures.append(
+                f"sample task {task_id} has invalid mode: {task.get('mode')}"
+            )
         fixture = task.get("fixture")
         if fixture not in fixture_names:
-            failures.append(f"sample task {task_id} references undocumented fixture: {fixture}")
+            failures.append(
+                f"sample task {task_id} references undocumented fixture: {fixture}"
+            )
         for field in (
             "required_behaviors",
             "forbidden_behaviors",
@@ -300,7 +314,9 @@ def check_sample_tasks() -> list[str]:
         ):
             value = task.get(field)
             if not is_non_empty_string_list(value):
-                failures.append(f"sample task {task_id} needs non-empty string list {field}")
+                failures.append(
+                    f"sample task {task_id} needs non-empty string list {field}"
+                )
         for ref in task.get("primary_references", []):
             if not (REFERENCES / ref).exists():
                 failures.append(f"sample task {task_id} references missing file: {ref}")
@@ -361,10 +377,14 @@ def check_schema_documentation_alignment() -> list[str]:
                 failures.append(f"{relative_path} review schema omits field: {field}")
         for category in CATEGORIES:
             if category not in text:
-                failures.append(f"{relative_path} review schema omits category: {category}")
+                failures.append(
+                    f"{relative_path} review schema omits category: {category}"
+                )
         for severity in SEVERITIES:
             if severity not in text:
-                failures.append(f"{relative_path} review schema omits severity: {severity}")
+                failures.append(
+                    f"{relative_path} review schema omits severity: {severity}"
+                )
     return failures
 
 
@@ -420,7 +440,9 @@ def validate_scorecard_example(example: Any, sample_task_ids: set[Any]) -> list[
         )
     for dimension, score in scores.items():
         if not isinstance(score, int) or score < 0 or score > 2:
-            failures.append(f"scorecard.example.json invalid score for {dimension}: {score}")
+            failures.append(
+                f"scorecard.example.json invalid score for {dimension}: {score}"
+            )
     if example.get("task_id") not in sample_task_ids:
         failures.append("scorecard.example.json task_id does not match a sample task")
     if example.get("final_verdict") not in {"pass", "marginal", "fail"}:

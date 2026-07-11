@@ -60,9 +60,10 @@ Pass thresholds:
 
 ### project_adaptation
 
-0: Forces generic preferences over project configuration.
-1: Adapts partially but misses local conventions.
-2: Follows project config and explains any deviations.
+0: Ignores the house stack or hides local tooling conflicts.
+1: Applies the house stack partially or explains mismatches vaguely.
+2: Applies the house stack, respects the behavior contract, and clearly reports
+local mismatches.
 
 ### reporting_clarity
 

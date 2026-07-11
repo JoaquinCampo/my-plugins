@@ -1,7 +1,10 @@
 # Validation matrix
 
-Choose validation from the work mode and project configuration. Run focused
-checks first, then broader checks when the change is substantial or risky.
+Choose validation from the work mode and project contract. Run focused checks
+first, then broader checks when the change is substantial or risky. Use `uv run`
+for Python commands.
+
+<!-- markdownlint-disable MD013 -->
 
 | Work mode | Focused validation | Broader validation | Completion signal |
 | --- | --- | --- | --- |
@@ -16,6 +19,17 @@ checks first, then broader checks when the change is substantial or risky.
 | Concurrency or async | Tests with timeouts and cleanup checks | Stress or race-focused tests when available | No leaked tasks, deadlocks, unhandled exceptions, or flaky outcomes observed |
 | Security-sensitive change | Input validation tests, unsafe path checks, secret/log review | Dedicated security review or threat model | Obvious abuse cases are covered and residual risks are named |
 
+<!-- markdownlint-enable MD013 -->
+
+## Standard command set
+
+Use the narrowest useful subset first, then broaden:
+
+- `uv run pytest` for tests.
+- `uv run ruff check` for linting.
+- `uv run ruff format` for formatting.
+- `uv run mypy` for types.
+
 ## Reporting validation
 
 Always report:
@@ -29,6 +43,6 @@ Do not claim full verification when only focused checks ran.
 
 ## Sources
 
-- pytest good practices: https://docs.pytest.org/en/stable/explanation/goodpractices.html
-- Python Packaging User Guide: https://packaging.python.org/
-- Ruff docs: https://docs.astral.sh/ruff/
+- pytest good practices: <https://docs.pytest.org/en/stable/explanation/goodpractices.html>
+- Python Packaging User Guide: <https://packaging.python.org/>
+- Ruff docs: <https://docs.astral.sh/ruff/>

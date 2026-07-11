@@ -38,6 +38,9 @@ For new code on supported versions, prefer:
 - `T | None`, not `typing.Optional[T]`
 - `A | B`, not `typing.Union[A, B]`
 
+Do not import `List`, `Dict`, `Optional`, or `Union` only to spell types that
+built-in generics and union syntax already cover.
+
 ## Accept broad, return useful
 
 Accept the broadest interface the function needs, such as `Sequence[str]` when
@@ -63,12 +66,12 @@ missing branches visible to the type checker.
 
 ## Sources
 
-- Python typing docs: https://docs.python.org/3/library/typing.html
-- Python 3.14 annotation changes: https://docs.python.org/3.14/whatsnew/3.14.html#pep-649-pep-749-deferred-evaluation-of-annotations
-- future annotations docs: https://docs.python.org/3/library/__future__.html
-- annotationlib docs: https://docs.python.org/3/library/annotationlib.html
-- PEP 585 built-in generics: https://peps.python.org/pep-0585/
-- PEP 604 union operator: https://peps.python.org/pep-0604/
-- PEP 673 Self type: https://peps.python.org/pep-0673/
-- PEP 695 type parameter syntax: https://peps.python.org/pep-0695/
-- Typing protocol spec: https://typing.python.org/en/latest/spec/protocol.html
+- Python typing docs: <https://docs.python.org/3/library/typing.html>
+- Python 3.14 annotation changes: <https://docs.python.org/3.14/whatsnew/3.14.html#pep-649-pep-749-deferred-evaluation-of-annotations>
+- future annotations docs: <https://docs.python.org/3/library/__future__.html>
+- annotationlib docs: <https://docs.python.org/3/library/annotationlib.html>
+- PEP 585 built-in generics: <https://peps.python.org/pep-0585/>
+- PEP 604 union operator: <https://peps.python.org/pep-0604/>
+- PEP 673 Self type: <https://peps.python.org/pep-0673/>
+- PEP 695 type parameter syntax: <https://peps.python.org/pep-0695/>
+- Typing protocol spec: <https://typing.python.org/en/latest/spec/protocol.html>

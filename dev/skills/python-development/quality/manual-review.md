@@ -6,9 +6,10 @@ Use these prompts to review an agent transcript after it applied the skill.
 
 - Did the agent inspect local instructions and project config before choosing
   commands or patterns?
-- Did it identify Python version, package manager, test runner, linter, type
-  checker, and source layout when relevant?
-- Did it avoid applying optional tool guidance as universal policy?
+- Did it identify Python version, uv status, Ruff config, MyPy config, pytest
+  config, and source layout when relevant?
+- Did it apply the house stack uniformly and surface local mismatches instead of
+  silently adapting?
 
 ## Contract and scope
 

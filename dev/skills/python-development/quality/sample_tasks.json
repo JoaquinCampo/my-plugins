@@ -31,12 +31,12 @@
     "prompt": "Add a CLI command that reads a config file and prints normalized JSON.",
     "fixture": "cli-config-app",
     "required_behaviors": [
-      "Discovers existing CLI framework and commands",
+      "Uses Typer and the house uv command style",
       "Keeps command handler thin",
       "Tests exit code, stdout, stderr, and config validation"
     ],
     "forbidden_behaviors": [
-      "Hardcodes a different package manager",
+      "Uses a package manager other than uv",
       "Puts business logic only inside the command function",
       "Logs machine-readable output to stderr"
     ],
@@ -188,7 +188,7 @@
     "prompt": "Upgrade the HTTP client dependency used by this package.",
     "fixture": "packaged-library",
     "required_behaviors": [
-      "Discovers package manager and lockfile",
+      "Uses uv and checks uv.lock or reports the migration gap",
       "Separates runtime and development dependencies",
       "Runs integration-focused validation around the dependency boundary"
     ],
@@ -216,12 +216,12 @@
     "fixture": "library-service",
     "required_behaviors": [
       "Chooses a named data shape instead of a bare tuple",
-      "Explains whether dataclass, TypedDict, or Pydantic is appropriate",
+      "Explains why a simple Pydantic model is or is not the right boundary shape",
       "Keeps runtime validation at the boundary"
     ],
     "forbidden_behaviors": [
       "Uses a tuple whose positions become public API",
-      "Adds Pydantic when no runtime validation is needed",
+      "Adds complex Pydantic model logic instead of simple fields and validators",
       "Adds speculative fields or future options"
     ],
     "primary_references": [
@@ -241,12 +241,12 @@
     "prompt": "Add diagnostics around a retrying external service adapter.",
     "fixture": "library-service",
     "required_behaviors": [
-      "Uses the project's existing logging or observability style",
+      "Uses Loguru for logging and preserves useful observability context",
       "Adds useful boundary context without secrets",
       "Keeps metrics or tracing conditional on existing infrastructure"
     ],
     "forbidden_behaviors": [
-      "Introduces a new observability stack without request",
+      "Introduces metrics or tracing infrastructure without request",
       "Logs secrets or full sensitive payloads",
       "Adds noisy per-item logs in a hot loop"
     ],

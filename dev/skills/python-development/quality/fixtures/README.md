@@ -10,9 +10,9 @@ JSON config loader. It exposes a small public API and a service adapter.
 
 ## cli-config-app
 
-Runnable fixture under `cli-config-app/`. A small application with one CLI entry
-point, config files, environment variable overrides, and tests around stdout,
-stderr, and exit codes.
+Runnable fixture under `cli-config-app/`. A small Typer application with one CLI
+entry point, config files, environment variable overrides, Pydantic validation,
+and tests around stdout, stderr, and exit codes.
 
 ## migration-api-change
 

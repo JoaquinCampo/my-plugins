@@ -1,17 +1,20 @@
 # Data modeling
 
-Choose the lightest data shape that makes invalid states difficult and valid
-states easy to read.
+Choose clear data shapes that make invalid states difficult and valid states
+easy to read. Pydantic is the default named model for boundary data,
+serialization, settings, and validated application records.
 
 ## Plain collections
 
 Use plain `dict`, `list`, `tuple`, and `set` for local, obvious, short-lived
-shapes. Promote them when keys, positions, or invariants become important.
+shapes. Promote them to a named Pydantic model when keys, positions, validation,
+or serialization become important.
 
 ## dataclass
 
-Use `@dataclass` for internal records with named fields and little or no runtime
-validation.
+Use `@dataclass` only for internal records with named fields and little or no
+runtime validation. Prefer Pydantic when data crosses a boundary, needs parsing,
+or appears in serialized output.
 
 Good defaults:
 
@@ -25,9 +28,9 @@ close to the data's invariants.
 
 ## TypedDict
 
-Use `TypedDict` for JSON-like dictionaries, request or response payloads, and
-config fragments where runtime validation is not needed but static key checking
-helps.
+Use `TypedDict` for JSON-like dictionaries only when runtime validation is not
+needed and static key checking is enough. Prefer Pydantic for request payloads,
+response payloads, config fragments, and other boundary data.
 
 Use `NotRequired` for optional keys rather than making every value optional.
 
@@ -35,10 +38,13 @@ Use `NotRequired` for optional keys rather than making every value optional.
 
 Use Pydantic v2 when runtime validation, parsing, serialization, or settings
 integration matters. Keep models flat and validators simple. Prefer explicit
-fields and simple validators over clever metaprogramming.
+fields, `Field`, and simple validators over clever metaprogramming.
 
-Use `pydantic-settings` for environment-backed settings rather than hand-rolled
-environment parsing when Pydantic is already an acceptable dependency.
+Avoid fancy logic on Pydantic models unless it protects a real invariant. Put
+business logic in ordinary functions or services that are easy to test.
+
+Use `pydantic-settings` for environment-backed settings and configuration
+objects rather than hand-rolled environment parsing.
 
 ## Enum and StrEnum
 
@@ -49,12 +55,13 @@ especially with `StrEnum`.
 ## NamedTuple
 
 Use `NamedTuple` only when tuple behavior is part of the intended API. For new
-opaque result records, prefer a dataclass.
+opaque result records, prefer a simple Pydantic model when validation or
+serialization matters, otherwise use an internal dataclass.
 
 ## Sources
 
-- dataclasses docs: https://docs.python.org/3/library/dataclasses.html
-- typing TypedDict docs: https://docs.python.org/3/library/typing.html#typing.TypedDict
-- enum docs: https://docs.python.org/3/library/enum.html
-- Pydantic models docs: https://docs.pydantic.dev/latest/concepts/models/
-- Pydantic settings docs: https://docs.pydantic.dev/latest/concepts/pydantic_settings/
+- dataclasses docs: <https://docs.python.org/3/library/dataclasses.html>
+- typing TypedDict docs: <https://docs.python.org/3/library/typing.html#typing.TypedDict>
+- enum docs: <https://docs.python.org/3/library/enum.html>
+- Pydantic models docs: <https://docs.pydantic.dev/latest/concepts/models/>
+- Pydantic settings docs: <https://docs.pydantic.dev/latest/concepts/pydantic_settings/>

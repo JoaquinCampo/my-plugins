@@ -28,8 +28,9 @@ Common fields to inspect:
   test, lint, or docs groups when the project uses the PyPA dependency-groups
   specification.
 - `[build-system]` backend and requirements.
-- tool tables such as `[tool.ruff]`, `[tool.pytest.ini_options]`, `[tool.mypy]`,
-  `[tool.pyright]`, `[tool.uv]`, `[tool.hatch]`, or `[tool.pdm]`.
+- tool tables such as `[tool.ruff]`, `[tool.pytest.ini_options]`,
+  `[tool.mypy]`, and `[tool.uv]`. Other tool tables are migration evidence to
+  report.
 
 ## Source layout
 
@@ -43,14 +44,14 @@ explicit task.
 For packaging changes, validate the affected behavior:
 
 - import the package
-- run configured tests
-- build a wheel or sdist when relevant
+- run `uv run pytest`
+- build with `uv build` when relevant
 - verify CLI entry points or package data if changed
 
 ## Sources
 
-- Python Packaging User Guide: https://packaging.python.org/
-- pyproject guide: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
-- Dependency groups specification: https://packaging.python.org/en/latest/specifications/dependency-groups/
-- src layout discussion: https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/
-- import system docs: https://docs.python.org/3/reference/import.html
+- Python Packaging User Guide: <https://packaging.python.org/>
+- pyproject guide: <https://packaging.python.org/en/latest/guides/writing-pyproject-toml/>
+- Dependency groups specification: <https://packaging.python.org/en/latest/specifications/dependency-groups/>
+- src layout discussion: <https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/>
+- import system docs: <https://docs.python.org/3/reference/import.html>

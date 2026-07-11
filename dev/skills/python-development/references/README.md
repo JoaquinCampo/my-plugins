@@ -3,10 +3,12 @@
 Open only the topic needed for the current task. `SKILL.md` is the operating
 playbook; these files provide the deeper rules, caveats, and citations.
 
+<!-- markdownlint-disable MD013 -->
+
 | Topic | File | Use when |
 | --- | --- | --- |
 | Project discovery | `project-discovery.md` | Starting work in any repo or choosing commands |
-| Tooling | `tooling.md` | Formatters, linters, type checkers, pre-commit, CI |
+| Tooling | `tooling.md` | Ruff, MyPy, validation commands, wrappers, CI |
 | Development loop | `development-loop.md` | Implementing features or general code changes |
 | Validation | `validation.md` | Choosing checks by work mode and risk |
 | API design | `api-design.md` | Designing functions, signatures, returns, and boundaries |
@@ -35,7 +37,9 @@ playbook; these files provide the deeper rules, caveats, and citations.
 | Notebooks | `notebooks.md` | Notebook reproducibility, review, and test extraction |
 | Maintenance | `maintenance.md` | Consistency checks when editing this skill |
 | Scientific Python | `scientific-python.md` | NumPy, pandas, torch, and array-heavy code |
-| Libraries | `libraries.md` | Optional Pydantic, Typer, Loguru, FastAPI, ecosystem notes |
+| Libraries | `libraries.md` | uv, Ruff, MyPy, pytest, Pydantic, pydantic-settings, Typer, Loguru, FastAPI |
+
+<!-- markdownlint-enable MD013 -->
 
 ## Entry format
 
@@ -49,4 +53,5 @@ When adding to this catalogue, prefer this shape:
 - Source
 
 Keep examples generic. Do not encode project names, internal paths, or one
-repository's commands as universal guidance.
+repository's commands as universal guidance unless they are the house Python
+commands documented by this skill.
