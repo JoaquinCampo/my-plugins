@@ -66,7 +66,7 @@ Concrete cue: if you find yourself re-reading the same file in the same review, 
 
 Trigger-shaped, not threshold-table. Named triggers:
 
-- **Broad and shallow** ("is X convention followed everywhere?"): dispatch an `Explore` subagent with `model: "haiku"`, single bounded query.
+- **Broad and shallow** ("is X convention followed everywhere?"): dispatch one bounded Explore subagent on `gpt-5.6-luna` at low effort.
 - **Deep and narrow** ("does this migration break N specific call sites?"): grep call sites yourself, then `Read` the 2-3 hottest. Don't fan out for a question you can answer in 2 reads.
 - **Unknown module shape** ("I don't know what this module does"): `Explore` subagent first to map it, then targeted `Read` on what matters.
 

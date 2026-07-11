@@ -15,7 +15,7 @@
   "interface": {
     "displayName": "Tools",
     "shortDescription": "Artifacts, advisor, browser/TUI automation, subagents, and model routing.",
-    "longDescription": "A practical tools bundle for creating polished visual artifacts, consulting a gpt-5.5 high-reasoning advisor, automating browsers and TUIs, orchestrating subagents, and routing Codex work across Spark, mini, 5.4, and 5.5.",
+    "longDescription": "A practical tools bundle for creating polished visual artifacts, consulting a GPT 5.6 Sol xhigh advisor, automating browsers and TUIs, orchestrating subagents, and routing Codex work across GPT 5.6 Luna, Terra, and Sol.",
     "developerName": "Joaquin Campo",
     "category": "Development",
     "capabilities": ["Write", "Review"],

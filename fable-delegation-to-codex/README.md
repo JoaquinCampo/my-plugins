@@ -13,7 +13,7 @@ brew install codex        # or: npm i -g @openai/codex
 codex login
 ```
 
-Verified against `codex-cli 0.142.4`. The skill relies on `codex exec` flags `-m`, `-C`, `-o`, `-s`, `--skip-git-repo-check`, `--output-schema`, and `codex exec resume`.
+Verified against `codex-cli 0.144+` for GPT-5.6 Sol/Terra/Luna model ids. The skill relies on `codex exec` flags `-m`, `-C`, `-o`, `-s`, `--skip-git-repo-check`, `--output-schema`, and `codex exec resume`.
 
 ### 2. `~/.codex/config.toml` keys
 
@@ -29,29 +29,37 @@ multi_agent = true
 
 ### 3. Models
 
-The tier table uses `gpt-5.3-codex-spark` (fast default) and `gpt-5.5`. Check what your Codex plan exposes with a quick `codex exec -m gpt-5.3-codex-spark "say ok"`. If Spark is unavailable, route Spark-shaped tasks to `gpt-5.4-mini` (see the companion skill below).
+The tier table uses GPT-5.6:
+
+| Tier | Model id | Default role |
+|---|---|---|
+| Luna | `gpt-5.6-luna` | Low for mechanical search, high for bounded work, xhigh for quality-sensitive normal work |
+| Terra | `gpt-5.6-terra` | High for larger multi-file implementation |
+| Sol | `gpt-5.6-sol` | Medium for ambiguous substantive work, high for hard judgment, xhigh for advisor only |
+
+Check what your Codex plan exposes with `codex exec -m gpt-5.6-luna "say ok"`. GPT 5.6 requires Codex CLI 0.144 or newer. If the ids are unavailable, upgrade Codex rather than silently falling back to an older model family.
 
 ### 4. Codex-side fan-out instruction (recommended)
 
 For the "fan out internal subagents" scale directive to land reliably, add this to `~/.codex/AGENTS.md`:
 
 ```markdown
-- Whenever a task decomposes into independent delegable units (multi-file sweeps, parallel
-  exploration, batched mechanical edits), use the orchestrating-subagents skill: spawn internal
-  subagents in parallel and route their models per the codex-model-routing skill. Keep the final
-  message a compact synthesis; subagent transcripts stay out of it. This applies especially when
-  running non-interactively (`codex exec`) as a worker for an orchestrating agent.
+- Launch the critical-path unit first. Use the orchestrating-subagents skill only when a task
+  has genuinely independent units whose combined value justifies the usage, normally capped at
+  2 to 3 concurrent children. Route models and effort per codex-model-routing, keep ordinary
+  children single-agent, and return only a compact synthesis. While children run, continue useful
+  independent work and wait only when the next result is required.
 ```
 
 This requires the `orchestrating-subagents` skill to be available on the Codex side (in this marketplace it ships with the `tools` plugin, which also works as a Codex plugin).
 
 ### 5. Companion skill (optional)
 
-`tools:codex-model-routing` (in this marketplace's `tools` plugin) provides the finer routing table (`gpt-5.4`, `gpt-5.4-mini`, maker/checker/fixer loops). The skill cross-references it; without it, the three-tier table in the skill still works.
+`tools:codex-model-routing` (in this marketplace's `tools` plugin) provides the usage-aware Luna/Terra/Sol effort ladder and maker/checker/fixer routing. The skill cross-references it; without it, the three-tier table in the skill still works.
 
 ## How it behaves
 
-- Delegations launch as background Bash commands, so the harness notifies Fable on completion; several independent delegations run in parallel.
+- Delegations launch as background Bash commands, so Fable continues useful work while they run. Parallelism is selective and normally capped at 2 to 3 independent units.
 - Results land in a per-task `-o` file; Fable reads only that file, never the transcript log.
 - No-write tasks always run with `-s read-only` as a hard guarantee.
 - Write tasks get an isolated worktree, or stay read-only while Fable holds the working tree; two agents never edit the same tree concurrently.
