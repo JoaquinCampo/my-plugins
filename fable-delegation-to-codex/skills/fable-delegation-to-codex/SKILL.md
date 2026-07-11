@@ -32,7 +32,7 @@ Every Fable turn is dispatch or judge, never execute.
 
 ## Model tiers (GPT-5.6)
 
-Use the GPT-5.6 Sol / Terra / Luna family. Exact ids:
+Use the GPT-5.6 Sol / Terra / Luna family. GPT 5.6 reasoning efforts do **not** map one-to-one to GPT 5.5, so begin below the similarly named GPT 5.5 effort. Exact ids:
 
 | Model and effort | Use for |
 |---|---|
@@ -40,13 +40,14 @@ Use the GPT-5.6 Sol / Terra / Luna family. Exact ids:
 | `gpt-5.6-luna` at high | Small, bounded implementation and routine work |
 | `gpt-5.6-luna` at xhigh | Quality-sensitive normal coding and independent review |
 | `gpt-5.6-terra` at high | Larger multi-file implementation and substantial cross-file reasoning |
-| `gpt-5.6-sol` at medium | Ambiguous substantive work that needs stronger reasoning |
+| `gpt-5.6-sol` at low | Default starting effort for a Codex conversation or low-risk judgment task |
+| `gpt-5.6-sol` at medium | Serious daily work and ambiguous substantive tasks that need stronger reasoning |
 | `gpt-5.6-sol` at high | Architecture, hard debugging, difficult review, and final judgment |
-| `gpt-5.6-sol` at xhigh | Advisor only, never an ordinary worker |
+| `gpt-5.6-sol` at xhigh | Exceptionally hard advisor work, never an ordinary worker |
 
 For finer routing and maker/checker/fixer loops, use tools:codex-model-routing.
 
-Start with the cheapest reliable route and escalate only when uncertainty, failed validation, conflicting evidence, or meaningful risk justifies it. Avoid max effort, Terra xhigh, and broad Sol fan-out. Prefer one strong worker over several weaker workers repeating the same task. GPT 5.6 is required; if the ids are unavailable, upgrade Codex rather than silently falling back to an older model family.
+Start each Codex conversation at Sol low. For delegated workers, start with the cheapest applicable Luna or Terra route; escalate only when uncertainty, failed validation, conflicting evidence, or meaningful risk justifies it. Avoid max effort, Terra xhigh, and broad Sol fan-out. Prefer one strong worker over several weaker workers repeating the same task. GPT 5.6 is required; if the ids are unavailable, upgrade Codex rather than silently falling back to an older model family.
 
 Requires Codex CLI that recognizes the 5.6 ids, verified here with 0.144.0. Confirm with `codex --version` and a quick `codex exec -m gpt-5.6-luna "say ok"`.
 

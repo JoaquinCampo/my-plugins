@@ -8,6 +8,8 @@ description: Use when spawning Codex subagents or Codex threads and choosing amo
 ## Principle
 Always choose the cheapest GPT 5.6 route that can reliably do the delegated job, and make the model and effort explicit. The main thread keeps judgment and synthesis; subagents return compact evidence, patches, or verdicts.
 
+GPT 5.6 reasoning efforts do **not** map one-to-one to GPT 5.5. Start lower than the similarly named GPT 5.5 effort: `gpt-5.6-sol` at `low` is the default starting point for a Codex conversation or low-risk main-thread judgment. Escalate only when the task provides evidence that it needs more reasoning.
+
 Use only the GPT 5.6 family exposed by Codex CLI 0.144 or newer: `gpt-5.6-luna`, `gpt-5.6-terra`, and `gpt-5.6-sol`. If these ids are unavailable, stop and ask for the runtime to be upgraded rather than silently routing to an older family.
 
 ## Routing table
@@ -18,11 +20,12 @@ Use only the GPT 5.6 family exposed by Codex CLI 0.144 or newer: `gpt-5.6-luna`,
 | `gpt-5.6-luna` | `high` | Small, bounded implementation and routine work | Default economical worker route. |
 | `gpt-5.6-luna` | `xhigh` | Quality-sensitive normal coding and independent review | Use when normal work needs stronger reasoning. |
 | `gpt-5.6-terra` | `high` | Larger multi-file implementation | Use for substantial cross-file reasoning. |
-| `gpt-5.6-sol` | `medium` | Ambiguous substantive work | Intermediate escalation before the judgment tier. |
+| `gpt-5.6-sol` | `low` | Default Codex conversation and low-risk main-thread judgment | The GPT 5.6 default. Do not treat it as equivalent to GPT 5.5 low. |
+| `gpt-5.6-sol` | `medium` | Serious daily work and ambiguous substantive tasks | First escalation when Sol low is insufficient. |
 | `gpt-5.6-sol` | `high` | Architecture, hard debugging, difficult review, and final judgment | Reserve for work that genuinely needs judgment. |
-| `gpt-5.6-sol` | `xhigh` | Advisor only | Do not use for ordinary subagents. |
+| `gpt-5.6-sol` | `xhigh` | Exceptionally hard advisor work | Do not use for ordinary subagents. |
 
-Start with the cheapest reliable route. Escalate only when uncertainty, failed validation, conflicting evidence, or task risk justifies it. Avoid max effort, Terra xhigh, and broad Sol fan-out because their quality gain usually does not justify the usage.
+Start with the cheapest reliable route. For primary Codex conversations, start at Sol low; for delegated workers, start with the applicable Luna or Terra route. Escalate only when uncertainty, failed validation, conflicting evidence, or task risk justifies it. Avoid max effort, Terra xhigh, and broad Sol fan-out because their quality gain usually does not justify the usage.
 
 Prefer one strong agent over several weaker agents repeating the same work. Launch the critical-path child first, parallelize only independent units whose combined value justifies the usage, and normally cap concurrency at 2 to 3 children. Pipeline dependent checks as soon as prerequisites finish. Async reduces elapsed time, not token or quota usage; use blocked time for independent work and call wait only when the next result is required.
 

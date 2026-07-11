@@ -29,13 +29,13 @@ multi_agent = true
 
 ### 3. Models
 
-The tier table uses GPT-5.6:
+The tier table uses GPT-5.6. Its reasoning efforts do **not** map one-to-one to GPT-5.5, so start below the similarly named GPT-5.5 effort:
 
 | Tier | Model id | Default role |
 |---|---|---|
 | Luna | `gpt-5.6-luna` | Low for mechanical search, high for bounded work, xhigh for quality-sensitive normal work |
 | Terra | `gpt-5.6-terra` | High for larger multi-file implementation |
-| Sol | `gpt-5.6-sol` | Medium for ambiguous substantive work, high for hard judgment, xhigh for advisor only |
+| Sol | `gpt-5.6-sol` | Low to start a Codex conversation or low-risk judgment; medium for serious daily and ambiguous work; high for hard judgment; xhigh for exceptionally hard advisor work only |
 
 Check what your Codex plan exposes with `codex exec -m gpt-5.6-luna "say ok"`. GPT 5.6 requires Codex CLI 0.144 or newer. If the ids are unavailable, upgrade Codex rather than silently falling back to an older model family.
 
