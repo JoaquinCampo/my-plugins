@@ -142,6 +142,44 @@
       "description": "Routes all delegable work (exploration, bulk reads, tests, mechanical edits, first-pass reviews, sweeps) from a Fable session to the Codex CLI via codex exec, spending Codex quota instead of Anthropic tokens.",
       "version": "0.1.0",
       "keywords": ["codex", "delegation", "subagents", "orchestration", "tokens", "spark", "fable"]
+    },
+    {
+      "name": "understand-anything",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Egonex-AI/Understand-Anything.git",
+        "path": "understand-anything-plugin"
+      },
+      "description": "AI-powered codebase analysis that produces interactive knowledge graphs, guided tours, and plain-English architecture explanations.",
+      "version": "2.9.2",
+      "keywords": [
+        "codebase-analysis",
+        "knowledge-graph",
+        "architecture",
+        "onboarding",
+        "dashboard"
+      ]
+    },
+    {
+      "name": "worktrunk",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/max-sixty/worktrunk.git"
+      },
+      "description": "Git worktree management guidance and activity-tracking hooks for parallel AI agent workflows.",
+      "skills": [
+        "./skills/worktrunk",
+        "./skills/wt-switch-create"
+      ],
+      "hooks": "./plugins/worktrunk/hooks/hooks.json",
+      "strict": false,
+      "keywords": [
+        "git",
+        "worktree",
+        "worktrunk",
+        "agents",
+        "parallel-workflows"
+      ]
     }
   ]
 }
