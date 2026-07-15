@@ -1,7 +1,7 @@
 {
   "name": "humanizer",
-  "version": "2.5.1",
-  "description": "Strips AI-tell patterns from text (em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, etc.) based on Wikipedia's 'Signs of AI writing' guide.",
+  "version": "2.6.0",
+  "description": "Strips AI-tell patterns from text (em-dash overuse, inflated symbolism, rule of three, vague attributions, AI vocabulary, etc.) based on Wikipedia's 'Signs of AI writing' guide. Includes humanizer-espanol, a Spanish variant with register calibration (academic, technical, rioplatense colloquial).",
   "author": {
     "name": "Joaquin Campo",
     "email": "jcamponario@gmail.com"
