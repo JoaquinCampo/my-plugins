@@ -20,13 +20,13 @@ Use only the models exposed by current Codex releases: `gpt-5.6-luna`, `gpt-5.6-
 | `gpt-5.3-codex-spark` | `medium` | Bounded recon, small targeted fixes, explorer-style work | OpenAI's default route for explorers and small fixers. |
 | `gpt-5.6-luna` | `low` | Bounded mechanical verification support | Use only when synthesis is not required. |
 | `gpt-5.6-luna` | `high` | Small, bounded implementation and routine work | Default economical worker route. |
-| `gpt-5.6-luna` | `xhigh` | Light independent review and quality-sensitive normal coding | Use when normal work needs stronger reasoning. |
-| `gpt-5.6-terra` | `high` | Larger multi-file implementation and quality-sensitive review | Default reviewer route for substantive changes. |
+| `gpt-5.6-luna` | `xhigh` | Quality-sensitive normal coding and independent review | Use when normal work needs stronger reasoning. |
+| `gpt-5.6-terra` | `high` | Larger multi-file implementation | Use for substantial cross-file reasoning. |
 | `gpt-5.6-sol` | `low` | Default Codex conversation and low-risk main-thread judgment | Do not treat it as equivalent to older-family low efforts. |
 | `gpt-5.6-sol` | `medium` | Serious daily work and ambiguous substantive tasks | First escalation when Sol low is insufficient. |
 | `gpt-5.6-sol` | `high` | Architecture, hard debugging, difficult review, and final judgment | Reserve for work that genuinely needs judgment. |
-| `gpt-5.6-sol` | `xhigh` | Exceptionally hard advisor work | Do not use for ordinary subagents. |
-| `gpt-6-astra` | `medium`+ | Hardest end-to-end work Sol cannot settle: hard architecture, final judgment on high-stakes output | Default off. Do not use for routine children. |
+| `gpt-5.6-sol` | `xhigh` | Exceptionally hard reasoning when Astra is not warranted | Do not use for ordinary subagents. |
+| `gpt-6-astra` | `medium`+ | Advisor, hardest end-to-end work Sol cannot settle: hard architecture, final judgment on high-stakes output | Default off. Do not use for routine children. |
 
 Start with the cheapest reliable route. For primary Codex conversations, start at Sol low; for delegated workers, start with the applicable Spark, Luna, or Terra route. Escalate only when uncertainty, failed validation, conflicting evidence, or task risk justifies it. Avoid max effort, ultra, Terra xhigh, and broad Sol fan-out because their quality gain usually does not justify the usage.
 
@@ -77,7 +77,7 @@ Use self-contained prompts. Include enough context that the subagent does not ne
 For maker/checker/fixer loops:
 
 - Maker: Luna high for bounded work, Terra high for larger multi-file work, Sol medium for ambiguous substantive work.
-- Checker: Terra high as the default for quality-sensitive review, Luna xhigh for lighter independent review, Sol high for hard final judgment.
+- Checker: Luna xhigh for normal independent review, Sol high for hard final judgment.
 - Fixer: Luna high for exact findings, Spark medium for small targeted fixes, Terra high when fixes require broad cross-file reasoning.
 - Verifier: shell checks first, Luna low only when model judgment is needed.
 

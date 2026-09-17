@@ -35,7 +35,7 @@ Launch top-level subagents asynchronously. Time blocked waiting is wasted capaci
 ## The maker/checker loop
 For each substantive unit of work:
 1. Maker uses Luna high for bounded work, Terra high for larger multi-file work, or Sol medium for ambiguous substantive work.
-2. Checker is a separate agent, never the maker. Use Terra high as the default for quality-sensitive review, Luna xhigh for lighter independent review, and Sol high only for genuinely hard audits.
+2. Checker is a separate agent, never the maker. Use Luna xhigh for normal independent review and Sol high only for genuinely hard audits.
 3. Fixer uses Luna high for exact findings, Spark medium for small targeted fixes, or Terra high when fixes require broad cross-file reasoning.
 4. Verify with shell checks first, using Luna low only when model judgment is needed.
 
@@ -50,8 +50,8 @@ For each substantive unit of work:
   declaring done.
 
 ## Rules
-- Set model and effort explicitly on every spawn. Use Spark low or medium for mechanical search and near-instant bounded fixes, Luna low for mechanical verification support, Luna high for bounded work, Luna xhigh for quality-sensitive normal work, Terra high for larger multi-file work and quality-sensitive review, Sol medium for ambiguous substantive work, and Sol high for hard judgment.
-- Astra (`gpt-6-astra`) is the top tier, default off: reserve it for hard architecture, work Sol high cannot settle, and final judgment on high-stakes output. Do not use it for routine children.
+- Set model and effort explicitly on every spawn. Use Spark low or medium for mechanical search and near-instant bounded fixes, Luna low for mechanical verification support, Luna high for bounded work, Luna xhigh for quality-sensitive normal work, Terra high for larger multi-file work, Sol medium for ambiguous substantive work, and Sol high for hard judgment.
+- Astra (`gpt-6-astra`) is the top tier, default off: reserve it for the advisor, hard architecture, work Sol high cannot settle, and final judgment on high-stakes output. Do not use it for routine children.
 - Start with the cheapest reliable route and escalate only on uncertainty, failed validation, conflicting evidence, or meaningful risk.
 - Avoid max effort, ultra, Terra xhigh, and broad Sol fan-out. Fan out only independent work whose value justifies the usage.
 - Child delegation is disabled except for an explicitly selected fan-out orchestrator with one bounded child layer.
