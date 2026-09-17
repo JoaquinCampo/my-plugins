@@ -1,6 +1,6 @@
 ---
 name: orchestrating-subagents
-description: Use preemptively at the start of any session whose work decomposes into delegable units and whose main-thread context is worth protecting. A report, a large feature, a migration are examples, not the full set; the trigger is the shape (many token-heavy steps, compact results), not the task type. Also use whenever the user asks to delegate work to subagents. Invoke before context fills, not after.
+description: Use when session work decomposes into delegable units (many token-heavy steps with compact results) or the user asks to delegate to subagents. Invoke before context fills, not after.
 ---
 
 # Orchestrating Subagents
@@ -35,8 +35,8 @@ Launch top-level subagents asynchronously. Time blocked waiting is wasted capaci
 ## The maker/checker loop
 For each substantive unit of work:
 1. Maker uses Luna high for bounded work, Terra high for larger multi-file work, or Sol medium for ambiguous substantive work.
-2. Checker is a separate agent, never the maker. Use Luna xhigh for normal independent review and Sol high only for genuinely hard audits or final judgment.
-3. Fixer uses Luna high for exact findings or Terra high when fixes require broad cross-file reasoning.
+2. Checker is a separate agent, never the maker. Use Terra high as the default for quality-sensitive review, Luna xhigh for lighter independent review, and Sol high only for genuinely hard audits.
+3. Fixer uses Luna high for exact findings, Spark medium for small targeted fixes, or Terra high when fixes require broad cross-file reasoning.
 4. Verify with shell checks first, using Luna low only when model judgment is needed.
 
 ## Every delegation prompt carries
@@ -44,14 +44,16 @@ For each substantive unit of work:
 - The user's constraints pushed down (no em-dashes (--), style and format rules).
 - "Locate by content; line numbers are approximate."
 - The expected return shape (a list, a diff summary, a verdict).
+- Explicit completion criteria: what "done" means for this task, so the child keeps going until it is actually done instead of stopping at a first pass.
 - Ordinary children must not delegate further. Only an explicitly selected fan-out orchestrator may spawn one bounded child layer, using explicit model tiers and self-contained prompts.
 - On substantive work: consult the `advisor` before committing to an approach and before
   declaring done.
 
 ## Rules
-- Set model and effort explicitly on every spawn. Use Luna low for mechanical search, Luna high for bounded work, Luna xhigh for quality-sensitive normal work, Terra high for larger multi-file work, Sol medium for ambiguous substantive work, and Sol high for hard judgment. Sol xhigh is advisor-only.
+- Set model and effort explicitly on every spawn. Use Spark low or medium for mechanical search and near-instant bounded fixes, Luna low for mechanical verification support, Luna high for bounded work, Luna xhigh for quality-sensitive normal work, Terra high for larger multi-file work and quality-sensitive review, Sol medium for ambiguous substantive work, and Sol high for hard judgment.
+- Astra (`gpt-6-astra`) is the top tier, default off: reserve it for hard architecture, work Sol high cannot settle, and final judgment on high-stakes output. Do not use it for routine children.
 - Start with the cheapest reliable route and escalate only on uncertainty, failed validation, conflicting evidence, or meaningful risk.
-- Avoid max effort, Terra xhigh, and broad Sol fan-out. Fan out only independent work whose value justifies the usage.
+- Avoid max effort, ultra, Terra xhigh, and broad Sol fan-out. Fan out only independent work whose value justifies the usage.
 - Child delegation is disabled except for an explicitly selected fan-out orchestrator with one bounded child layer.
 - Keep running state outside your context (todo list or scratch file) so done work is never re-derived.
 - Run long tests, builds, servers, watchers, and log tails in the background when practical. Continue other useful work, inspect output only when needed, and clean up processes when finished.

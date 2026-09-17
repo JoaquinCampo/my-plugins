@@ -16,6 +16,8 @@ Always run the advisor with:
 - system prompt: the exact contents of `references/advisor_system_prompt.md`
 - user message: the full available transcript of the agent's task, tool calls, tool results, failed attempts, current plan, and self-checks
 
+Astra note: `gpt-6-astra` is now the top tier and is available, but this advisor keeps Sol xhigh as its pinned route; only change it if the user explicitly asks to run the advisor on Astra.
+
 Do not answer inline as the advisor when a subagent or separate model-call mechanism is available. If the runtime cannot spawn a separate `gpt-5.6-sol` call with xhigh reasoning, say that exact behavior is unavailable and ask for the runtime to be upgraded rather than silently using an older model family.
 
 ## Transcript Construction
